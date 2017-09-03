@@ -3,11 +3,17 @@ package com.ideassoft.bean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "TB_P_APPLYDETAIL", schema = "UCR_PMS")
+public class ApplyDetail implements java.io.Serializable {
 
+	// Fields
+	private static final long serialVersionUID = 5355901459291242118L;
 	private String detailId;
 	private String applyId;
+	private String content;
 	private String roomType;
 	private Double roomPrice;
 	private String rowOrder;
