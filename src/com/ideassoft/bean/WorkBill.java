@@ -103,7 +103,7 @@ public class WorkBill implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "RECORD_TIME", length = 7)
+	@Column(name = "RECORD_TIME", insertable=false, length = 7)
 	public Date getRecordTime() {
 		return this.recordTime;
 	}

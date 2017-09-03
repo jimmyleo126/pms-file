@@ -42,17 +42,28 @@
 		var path = "<%=request.getContextPath() %>";
 		var strdetailid = "<%=request.getParameter("strdetailid")%>";
 			function submitoffset(){
+			//console.log()
+			//$(window.parent.parent.document.all[160].contentDocument.logFrame.document.forms[0]).submit();
 				var offset = $("#offset").val();
 				$.ajax({
 			         url: path + "/consumptionworkbill.do",
 					 type: "post",
 					 data : {strdetailid : strdetailid},
 					 success: function(json) {
-						 $(window.parent.parent.document).find(".tab_two").click();
-						 window.parent.JDialog.close();
+					 	 showMsg(json.message);
+					 	 setTimeout("refreshpage()", 2000);
+						 //$(window.parent.parent.document).find(".tab_two").click();
+						 //$(window.parent.parent.parent.document.all[160].contentDocument.logFrame.document.forms[0]).submit();
+						 //window.parent.JDialog.close();
 					 },
 					 error: function(json) {}
 				});
+			}
+			
+			function refreshpage(){
+				 $(window.parent.parent.document).find(".tab_two").click();
+				 $(window.parent.parent.parent.document.all[160].contentDocument.logFrame.document.forms[0]).submit();
+				 window.parent.JDialog.close();
 			}
 		</script>
   </body>

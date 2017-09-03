@@ -99,7 +99,7 @@ public class WorkController {
 		String branchId = staff.getBranchId();
 		String recorduser = staff.getStaffId();
 		List<WorkBill> listworkbill = workservice.findByProperties(WorkBill.class, "branchId", branchId, "recordUser", recorduser, "status", "1");
-		if(listworkbill.size() > 0){
+		if(listworkbill.size() <= 0){
 			String workbillid = DateUtil.d2s(new Date(), "yyMMdd")  + workservice.getSequence("SEQ_NEW_WORKBILL");
 			String branchid = staff.getBranchId();
 			workbill.setWorkbillId(workbillid);
@@ -176,6 +176,24 @@ public class WorkController {
 				String workbillid){
 		WorkBill workbill = (WorkBill) workservice.findOneByProperties(WorkBill.class, "workbillId", workbillid);
 		JSONUtil.responseJSON(response, workbill);
+	}
+	
+	@RequestMapping("/isWorkbillCheckout.do")
+	public void isWorkbillCheckout(HttpServletRequest request, HttpServletResponse response,String workbillid){
+		WorkBill workbill = (WorkBill) workservice.findOneByProperties(WorkBill.class, "workbillId", workbillid);
+		try{
+			if( workbill == null){
+				JSONUtil.responseJSON(response, new AjaxResult(0, "未入住!"));
+			}else {
+				if("2".equalsIgnoreCase(workbill.getStatus())){
+					JSONUtil.responseJSON(response, new AjaxResult(1, "当前已结算!"));
+				}else {
+					JSONUtil.responseJSON(response, new AjaxResult(0, "未结算!"));
+				}				
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 

@@ -88,8 +88,8 @@
 			}
 			
 			function updatework(){
-				console.log($(window.parent.parent.document.all[160].contentDocument.logFrame.document.forms[0]));
-				/*var name = $("#name").val();
+				//console.log($(window.parent.parent.document.all[160].contentDocument.logFrame.document.forms[0]).submit());
+				var name = $("#name").val();
 				var describe = $("#describe").val();
 				$.ajax({
 			         url: path + "/updateworkbill.do",
@@ -106,7 +106,7 @@
 					 	}
 					 },
 					 error: function(json) {}
-				});*/
+				});
 			}
 			
 			/*账单*/

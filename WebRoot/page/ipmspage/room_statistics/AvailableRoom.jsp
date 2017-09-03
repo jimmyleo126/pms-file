@@ -10,12 +10,12 @@
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ipms/css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ipms/css/reset.css"/>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ipms/css/roomlist/customer.css"/>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/ipms/css/order/orderfont.css"/>
   </head>
   <body>
- <section class="change_room">
+   <section class="change_room">
 		<div class="high_header" id="roomtype_data">
 			<span class="span_title">房型：<span class="span_name">自主大床房</span></span>
 			<!--<i class="imooc" style="color: #3B3E40;">&#xe902;</i>-->
@@ -25,7 +25,6 @@
 				</ul>
 			</div>	
 		</div>
-		
 	</section>
 	<script src="<%=request.getContextPath()%>/script/common/newtipInfo.js"></script>
   	<script type="text/javascript">

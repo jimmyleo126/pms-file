@@ -6,7 +6,6 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	
 %>
 <!DOCTYPE HTML>
 <html>
@@ -44,6 +43,12 @@
 								<ul class="menu fa">
 									<li onclick="turnToPms();">
 										<a id ="pms" class="fa fa-h-square"></a>
+									</li>
+									<li onclick="turnToSysTem(this);">
+										<a id ="crm" class="fa fa-h-square"></a>
+									</li>
+									<li onclick="turnToSysTem(this);">
+										<a id ="ems" class="fa fa-h-square"></a>
 									</li>
 									<c:forEach items="${ subSystemKind }" var="subSystem">
 									<li  onclick="turnToSysTem(this)">

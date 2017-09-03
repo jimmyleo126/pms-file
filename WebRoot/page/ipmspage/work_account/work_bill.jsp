@@ -67,7 +67,6 @@
 		var path = "<%=request.getContextPath() %>";
 		var workbillid = '<%=request.getParameter("workbillid")%>';
 			$(function(){
-				console.log(workbillid)
 				$.ajax({
 			         url: path + "/loadWorkBillData.do",
 					 type: "post",
@@ -97,6 +96,10 @@
 			});
 			
 			function showaddbill(){
+				if(isWorkbillCheckout(workbillid)){
+					return false;
+				}
+				
 				window.parent.JDialog.open("入账", path + "/showgetAddWorkBill.do?workbillid=" + workbillid , 700, 400);
 			}
 			
@@ -119,7 +122,6 @@
 			}
 			
 			function loadworkbilldata(json){
-			console.log(json)
 				 var tabledata;
 			 	$.each(json, function(index){
 			 		tabledata = tabledata + "<tr class='odd' " + (json[index]["STATUS"] == 1?"":"style='color: #999'") + " onclick='aa(this)'>" +
@@ -143,6 +145,9 @@
 			}
 			
 			function consumption(){
+				if(isWorkbillCheckout(workbillid)){
+					return false;
+				}
 				$("input[type='checkbox']").is(':checked');
 				var arr = $("input[type='checkbox']");
 				var strdetailid = "";
@@ -160,14 +165,19 @@
 			}
 			
 			function checkout(){
+			
+				console.log($(window.parent.parent.document.all[160].contentDocument.logFrame.document));
+				if(isWorkbillCheckout(workbillid)){
+					return false;
+				}
 				$.ajax({
 			         url: path + "/checkoutworkbill.do",
 					 type: "post",
 					 data : {workbillid : workbillid},
 					 success: function(json) {
-						 console.log(json.message);
 						 if(json.result == 1){
 							 showMsg(json.message);
+							 $(window.parent.parent.document.all[160].contentDocument.logFrame.document.forms[0]).submit();
 						 }
 					 },
 					 error: function(json) {}

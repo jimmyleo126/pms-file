@@ -67,6 +67,7 @@
 			
 			function refreshpage(){
 				 $(window.parent.document).find(".tab_two").click();
+				 $(window.parent.parent.parent.document.all[160].contentDocument.logFrame.document.forms[0]).submit();
 				 window.parent.JDialog.close();
 			}
 			

@@ -3,6 +3,30 @@ var idcardReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; //身份证号码为
 var emailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
 
 
+function isWorkbillCheckout(workbillid){
+	flag = false;
+	msg = "";
+	if( !workbillid || workbillid == ""){
+		msg = "无此房单!"
+		showMsg(msg);
+		return false;
+	}
+	$.ajax({
+        url: path + "/isWorkbillCheckout.do",
+		 type: "post",
+		 data : {workbillid : workbillid},
+		 async:false,
+		 success: function(json) {
+			 if(json.result == 1){
+				 showMsg(json.message);
+				flag = true;
+			 }
+		 },
+		 error: function(json) {}
+	});
+	return flag;
+}
+
 function isCheckout(checkid){
 	flag = false;
 	msg = "";

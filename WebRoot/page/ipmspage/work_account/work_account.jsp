@@ -124,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		
 		function queryworkbillbytime(){
-			var arr = dealLocalDate(new Date()).split(" ");
+			var arr = dealLocalDate(new Date()).split(" ")[0];
 			$("#status").val("");
 			$("#currentdate").val(arr[0]);
 			$("#recorduser").val("");
@@ -146,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		})
 		
 		function queryworkbillbytimestatus(status){
-			var arr = dealLocalDate(new Date()).split(" ");
+			var arr = dealLocalDate(new Date()).split(" ")[0];
 			$("#status").val(status);
 			$("#currentdate").val(arr[0]);
 			$("#recorduser").val("");
