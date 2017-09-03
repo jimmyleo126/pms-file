@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+	<config>
+		<models>
+			<model modelId="M9013" name="日志管理" show="true" icon="log" subSystem="crm">
+				<page pageId="R901301" name="操作日志" editing="form" loadOnRender="true" showMenu="true">
+					<conditions>MEMBERNAME,IP,OPERMODULE</conditions>
+					<functions>FRESH</functions>
+					<target>OperateLog</target>
+					<strategy>default</strategy>
+				  	<query type="sql">
+						<sql>
+							operatelogmanage
+				    	</sql>
+					</query>
+					<columns>
+						<column columnId="LOGID" name="操作日志编号" editable="true" hidden="true" primaryKey="true"/>
+						<column columnId="OPERTYPE" name="操作类型" editable="true" align="center"/>
+						<column columnId="OPERMODULE" name="操作模块" editable="true" align="center"/>
+						<column columnId="CONTENT" name="操作内容" editable="true" align="center"/>
+						<column columnId="RECORDUSER" name="操作人" editable="true" align="center"/>
+						<column columnId="RECORDTIME" name="操作时间" editable="true" editType="date"/>
+						<column columnId="OPERIP" name="操作IP" editable="true" align="center"/>
+						<column columnId="REMARK" name="备注" editable="true" align="center" editType="textarea" />
+					</columns>
+				</page>
+			</model>
+		</models>
+	</config>
+</configs>

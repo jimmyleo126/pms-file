@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+	<config>
+		<models>
+		       <model modelId="M904" name="统计分析" show="true" icon="statistics" subSystem="crm">
+				<page pageId="R90401" name="销售汇总" editing="form" loadOnRender="true" showMenu="true">
+					<tabs>R9040101,R9040102</tabs>
+				</page>
+				<page pageId="R9040101"	name="商品" tab="true" containerId="R90401" editing="form" loadOnRender="true">
+				<charts caption="统计图表" subCaption="本周" latitude="GOODSNAME:TOTALSALEPRICE">Pie,Column,Line</charts>
+				<chartEvent>testFunc</chartEvent>
+				<chartDataEvent>testFunc</chartDataEvent>
+					<functions>EXCEL,FRESH</functions>
+					<conditions>STARTDATE,ENDDATE,GOODSNAME</conditions>
+					<funcCondRate>60,40</funcCondRate>
+					<strategy>default</strategy>
+					<sumCols>TOTALAMOUNT,TOTALSALEPRICE,RATE</sumCols>
+					<query type="sql">
+						<sql>
+							goodssummary
+						</sql>
+					</query>
+					<dataFormats>
+						<sql name="EXCEL">
+							goodssummaryel
+						</sql>
+					</dataFormats>
+					<columns>
+						<column columnId="GOODSID" name="商品编号" width="120" editable="true" align="center"  primaryKey="true" hidden="true"/>
+						<column columnId="GOODSNAME" name="商品名" width="120" editable="true" align="center"/>
+						<column columnId="TOTALAMOUNT" name="销售数量" width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="TOTALSALEPRICE" name="总额" width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="RATE" name="售卖率" width="120" editable="true" align="center"></column>
+					</columns>
+				</page>
+				<page pageId="R9040102"	name="房间" tab="true" containerId="R90401" editing="form" loadOnRender="true">
+				<charts caption="统计图表" subCaption="本周" latitude="ROOMTYPE:RATE">Pie,Column,Line</charts>
+					<functions>EXCEL,FRESH</functions>
+					<conditions>STARTDATE,ENDDATE,TYPENAME</conditions>
+					<funcCondRate>60,40</funcCondRate>
+					<strategy>default</strategy>
+					<sumCols>DAYS,RATE</sumCols>
+					<query type="sql">
+						<sql>
+							roomsummary
+						</sql>
+					</query>
+					<dataFormats>
+						<sql name="EXCEL">
+							roomsummaryel
+						</sql>
+					</dataFormats>
+					<columns>
+					<column columnId="CZ2" name="详情查询" width="100" 
+								editType="link" funcName="订单详情" callFunc="RoomSummary" buttonCls="b_tbutton" downloadable="false"/>
+						<column columnId="TYPENAME" name="房间名称" width="120" editable="true" align="center"/>
+						<column columnId="ROOMTYPE" name="房间类型" width="120" editable="true" align="center" hidden="true"/>
+						<column columnId="DAYS" name="入住天数" width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="RATE" name="入住率" width="120" editable="true" align="center" />
+						<column columnId="STARTDATE" name="开始时间" width="120" editable="true" align="center" hidden="true"/>
+						<column columnId="ENDDATE" name="截止时间" width="120" editable="true" align="center" hidden="true"/>
+					</columns>
+				</page>
+				<page pageId="R90402" name="销售明细" editing="form" loadOnRender="true" showMenu="true">
+					<tabs>R9110201,R9110202</tabs>
+				</page>
+				<page pageId="R9040201" name="商品" tab="true" containerId="R90402" editing="form" loadOnRender="true">
+					<functions>EXCEL,FRESH</functions>
+					<conditions>STARTDATE,ENDDATE,GOODSNAME</conditions>
+					<funcCondRate>60,40</funcCondRate>
+					<strategy>default</strategy>
+					<query type="sql">
+						<sql>
+					 		goodsdetail
+						</sql>
+					</query>
+					<dataFormats>
+						<sql name="EXCEL">
+							goodsdetailel
+						</sql>
+					</dataFormats>
+					<columns>				
+						<column columnId="GOODSNAME" name="商品名称" width="120" editable="true" align="center"/>
+						<column columnId="GOODSID" name="商品编号" width="120" editable="true" align="center" hidden="true"/>
+						<column columnId="SALEAMOUNT" name="销售数量" width="120" editable="true" align="center"/>
+						<column columnId="PURCHASEAMOUNT" name="采购数量" width="120" editable="true" align="center"/>
+						<column columnId="SALEPRICE" name="销售价格" width="120" editable="true" align="center"/>
+						<column columnId="PURCHASEPRICE" name="采购价格" width="120" editable="true" align="center"/>
+						<column columnId="TOTALSALEPRICE"  name="销售总额" width="120" editable="true" align="center"/>
+						<column columnId="DEBTS" name="挂账类型" editValue="1:工作账;2:房账 " editType="select"/>
+						<column columnId="PAYTYPE" name="支付方式" editValue="1:挂房账;2:现金;3:银联卡;4:微信;5:支付宝 " editType="select"/>
+					</columns>
+				</page>
+				<page pageId="R9040202" name="房间" tab="true" containerId="R90402" editing="form" loadOnRender="true">
+					<functions>FRESH,EXCEL</functions>
+					<conditions>STARTDATE,ENDDATE,TYPENAME</conditions>
+					<funcCondRate>60,40</funcCondRate>
+					<strategy>default</strategy>
+					<query type="sql">
+						<sql>
+						   roomdetail
+						</sql>
+					</query>
+					<dataFormats>
+						<sql name="EXCEL">
+						   roomdetailel
+						</sql>
+					</dataFormats>
+					<columns>
+					<column columnId="CZ1" name="详情查询" width="100" 
+								editType="link" funcName="订单详情" callFunc="OrderStream" buttonCls="b_tbutton" downloadable="false"/>
+						<column columnId="ROOMNAME" name="房间名称" width="120" editable="true" align="center"/>
+						<column columnId="ROOMTYPE" name="房间类型" width="120" editable="true" align="center" hidden="true"/>
+						<column columnId="TOTALORDERS" name="订单总数" width="120" editable="true" align="center"/>
+						<column columnId="AVALINORDERS" name="无效订单" width="120" editable="true" align="center"/>
+						<column columnId="AVALIABLEORDERS" name="有效订单" width="120" editable="true" align="center"/>
+						<column columnId="STARTDATE" name="开始日期" width="120" editable="true" align="center" hidden="true"/>
+						<column columnId="ENDDATE" name="结束日期" width="120" editable="true" align="center" hidden="true"/>
+					</columns>
+				</page>
+				<page pageId="R90403" name="销售日报表" editing="form" loadOnRender="true" showMenu="true">
+					<tabs>R9040301,R9040302</tabs>
+				</page>
+				<page pageId="R9040301" name="商品" tab="true" containerId="R90403" editing="form" loadOnRender="true">
+					<functions>EXCEL,FRESH</functions>
+					<conditions>STARTDATE</conditions>
+					<strategy>default</strategy>
+					<funcCondRate>60,40</funcCondRate>
+					<query type="sql">
+						<sql>
+					 		goodsdayreport
+						</sql>
+					</query>
+					<dataFormats>
+						<sql name="EXCEL">
+							goodsdayreport
+						</sql>
+					</dataFormats>
+					<columns>
+						<column columnId="GOODSID" name="商品编号" width="120" editable="true" align="center" hidden="true" primaryKey="true"/>
+						<column columnId="GOODSNAME" name="商品名称" width="120" editable="true" align="center"/>
+						<column columnId="TOTALAMOUNT" name="销售总量" width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="TOTALPRICE" name="销售总额"  width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="DEBTS" name="挂账类型"  width="120" editable="true" align="center" />
+						<column columnId="PAYTYPE" name="支付方式"  width="120" editable="true" align="center" />
+					</columns>
+				</page>
+				<page pageId="R9040302" name="房间" tab="true" containerId="R90403" editing="form" loadOnRender="true">
+					<functions>FRESH,EXCEL</functions>
+					<conditions>STARTDATE</conditions>
+					<strategy>default</strategy>
+					<funcCondRate>60,40</funcCondRate>
+					<query type="sql">
+						<sql>
+							roomdayreport
+						</sql>
+					</query>
+					<dataFormats>
+						<sql name="EXCEL">
+							roomdayreport
+						</sql>
+					</dataFormats>
+					<columns>
+						<column columnId="ROOMTYPE" name="房间类型" width="120" editable="true" align="center"/>
+						<column columnId="TIMES" name="销售总量" width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="TOTALPRICE" name="销售总额" width="120" editable="true" align="center" validateRule="NUMBER"/>
+					</columns>
+				</page>
+				<page pageId="R90404" name="销售月报表" editing="form" loadOnRender="true" showMenu="true">
+					<tabs>R9040401,R9040402</tabs>
+				</page>
+				<page pageId="R9040401" name="商品" tab="true" containerId="R90404" editing="form" loadOnRender="true">
+					<functions>EXCEL,FRESH</functions>
+					<conditions>STARTMONTH</conditions>
+					<strategy>default</strategy>
+					<funcCondRate>60,40</funcCondRate>
+					<query type="sql">
+						<sql>
+					 		goodsmonthreport
+						</sql>
+					</query>
+					<dataFormats>
+						<sql name="EXCEL">
+							goodsmonthreport
+						</sql>
+					</dataFormats>
+					<columns>
+						<column columnId="GOODSID" name="商品编号" width="120" editable="true" align="center" hidden="true" primaryKey="true"/>
+						<column columnId="GOODSNAME" name="商品名称" width="120" editable="true" align="center"/>
+						<column columnId="TOTALAMOUNT" name="销售总量" width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="TOTALPRICE" name="销售总额"  width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="DEBTS" name="挂账类型"  width="120" editable="true" align="center" />
+						<column columnId="PAYTYPE" name="支付方式"  width="120" editable="true" align="center" />
+					</columns>
+				</page>
+				<page pageId="R9040402" name="房间" tab="true" containerId="R90404" editing="form" loadOnRender="true">
+					<functions>FRESH,EXCEL</functions>
+					<conditions>STARTMONTH</conditions>
+					<strategy>default</strategy>
+					<funcCondRate>60,40</funcCondRate>
+					<query type="sql">
+						<sql>
+							roommonthreport
+						</sql>
+					</query>
+					<dataFormats>
+						<sql name="EXCEL">
+							roommonthreport
+						</sql>
+					</dataFormats>
+					<columns>
+						<column columnId="ROOMTYPE" name="房间类型" width="120" editable="true" align="center"/>
+						<column columnId="TIMES" name="销售总量" width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="TOTALPRICE" name="销售总额" width="120" editable="true" align="center" validateRule="NUMBER"/>
+					</columns>
+				</page>
+				<page pageId="R90405" name="畅销排行" editing="form" loadOnRender="true" showMenu="true">
+					<tabs>R9040501,R9040502</tabs>
+				</page>
+				<page pageId="R9040501" name="商品" tab="true" containerId="R90405" editing="form" loadOnRender="true">
+					<charts caption="统计图表"  latitude="GOODSNAME:TOTALAMOUNT">Column</charts>
+					<functions>FRESH,EXCEL</functions>
+					<conditions>STARTMONTH,GOODSNAME</conditions>
+					<strategy>default</strategy>
+					<funcCondRate>60,40</funcCondRate>
+					<sumCols></sumCols>
+					<query type="sql">
+						<sql>
+					 		goodsselllist
+						</sql>
+					</query>
+					<dataFormats>
+						<sql name="EXCEL">
+							goodsselllist
+						</sql>
+					</dataFormats>
+					<columns>
+						<column columnId="MONTHES" name="销售月份" width="120" editable="true" align="center" editType="date"/>
+						<column columnId="GOODSNAME" name="商品名称" width="120" editable="true" align="center"/>
+						<column columnId="SPECIFICATIONS" name="规格" width="120" editable="true" align="center"/>
+						<column columnId="TOTALAMOUNT" name="销售总量" editable="true"/>
+						<column columnId="RATE" name="畅销排名" editable="true"/>
+					</columns>
+				</page>
+				<page pageId="R9040502" name="房间" tab="true" containerId="R90405" editing="form" loadOnRender="true">
+				<charts caption="统计图表" subCaption="本周" latitude="ROOMID:TIMES">Column</charts>
+					<functions>FRESH,EXCEL</functions>
+					<conditions>STARTMONTH,TYPENAME</conditions>
+					<strategy>default</strategy>
+					<funcCondRate>60,40</funcCondRate>
+					<sumCols></sumCols>
+					<query type="sql">
+						<sql>
+							roomselllist
+						</sql>
+					</query>
+					<dataFormats>
+						<sql name="EXCEL">
+							roomselllist
+						</sql>
+					</dataFormats>
+					<columns>
+						<!--<column columnId="MONTHES" name="销售月份" editType="date"/>
+						--><column columnId="ROOMNAME" name="房间类型" width="120" editable="true" align="center"/>
+						<column columnId="CHECKAMOUNT" name="销售总量" width="120" editable="true" align="center"/>
+						<column columnId="RATE" name="畅销排名 " width="120" editable="true" align="center"/>
+					</columns>
+				</page>
+			<page pageId="R90410" name="客户来源分析"  loadOnRender="true" >
+					<conditions>STARTMONTH,ENDMONTH</conditions>
+					<funcCondRate>60,40</funcCondRate>		
+					<functions>FRESH,EXCEL</functions>					
+					<sumCols>APP,WEB,BRANCH,WAP,COOPERATION,OTHER</sumCols>
+					<target>Order</target>
+					<strategy>default</strategy>
+				  	<query type="sql">
+						<sql>
+						clientSource
+						</sql>
+					</query>
+					<columns>
+						<column columnId="CZ" name="本月详情" editType="button" buttonCls="button"  funcName="本月详情" 
+						callFunc="showDetailInformation" downloadable="false" />
+						<column columnId="ORDERTIME" name="月份" align="center"/>
+						<column columnId="APP" name="APP"  width="60" editable="true" align="center"/>
+						<column columnId="WEB" name="网站"  width="60" editable="true" align="center"/>
+						<column columnId="BRANCH" name="分店"  width="60" editable="true" align="center"/>
+						<column columnId="WAP" name="WAP"  width="60" editable="true" align="center"/>
+						<column columnId="COOPERATION" name="合作渠道"  width="60" editable="true" align="center"/>
+						<column columnId="OTHER" name="其他"  width="60" editable="true" align="center"/>
+						<column columnId="WECHAT" name="微信"  width="60" editable="true" align="center"/>
+						<column columnId="BT_TOTAL" name="当月新增"  width="60" editable="true" align="center"/>
+						
+					</columns>
+				</page>
+			<page pageId="R90411" name="交接班" loadOnRender="true">
+				    <conditions>STARTDATE,ENDDATE</conditions>
+				    <functions>FRESH,EXCEL</functions>						
+					<funcCondRate>60,40</funcCondRate>		
+					<strategy>default</strategy>
+				  	<query type="sql">
+						<sql>
+						shiftinfo
+							</sql>
+					</query>
+					<columns>
+					    <column columnId="CURRSHIFT" name="班次" width="120" editable="true" align="center"/>
+						<column columnId="RECORDTIME" name="操作时间" width="120" editable="true" align="center" editType="date"/>
+						<column columnId="BRANCHID" name="门店" width="120" editable="true" align="center"/>
+						<column columnId="LASTUSER" name="交班人 " width="120" editable="true" align="center"  />
+						<column columnId="CURRUSER" name="接班人" width="120" editable="true" align="center"/>						
+						<column columnId="REMARK" name="备注" width="120" editable="true" align="center"/>
+					</columns>
+				</page>
+				<page pageId="R90412" name="会员层次统计"  loadOnRender="true" >
+					<conditions>STARTMONTH,ENDMONTH</conditions>
+					<functions>FRESH,EXCEL</functions>
+					<sumCols>TEMPORARYMEMBER,REGISTERMEMBER,SILVERMEMBER,GOLDMEMBER,PLATINUMMEMBER,BLACKDIAMONDMEMBER,BUSINESSMEMBER,COMPANYMEMBER</sumCols>
+					<funcCondRate>60,40</funcCondRate>		
+					
+					
+                    <strategy>default</strategy>
+				  	<query type="sql">
+						<sql>
+							 memberRankStatistic
+				    	</sql>
+					</query>
+					<columns>
+						<column columnId="XQ" name="本月详情" editType="button" buttonCls="button" funcName="本月详情" callFunc="showMemberDetailInfo" downloadable="false" />
+						<column columnId="REGISTERTIME" name="月份" align="center"/>
+						<column columnId="TEMPORARYMEMBER" name="临时会员"  width="120" editable="true" align="center"/>
+						<column columnId="REGISTERMEMBER" name="注册会员"  width="120" editable="true" align="center"/>
+						<column columnId="SILVERMEMBER" name="银卡会员"  width="120" editable="true" align="center"/>
+						<column columnId="GOLDMEMBER" name="金卡会员"  width="120" editable="true" align="center"/>
+						<column columnId="PLATINUMMEMBER" name="铂金会员"  width="120" editable="true" align="center"/>
+						<column columnId="BLACKDIAMONDMEMBER" name="黑钻会员"  width="120" editable="true" align="center"/>
+						<column columnId="COMPANYMEMBER" name="公司会员"  width="120" editable="true" align="center"/>
+						<column columnId="BT_TOTAL" name="当月新增"  width="120" editable="true" align="center"/>
+						
+					</columns>
+				</page>
+			<page pageId="R90413" name="会员消费统计" loadOnRender="true">
+					<conditions>STARTDATE,ENDDATE,MEMBERNAME,IDCARD,MOBILE,MEMBER_RANK</conditions>
+					<functions>FRESH,EXCEL</functions>	
+					<funcCondRate>60,40</funcCondRate>						
+					<strategy>default</strategy>
+				  	<query type="sql">
+						<sql>
+						memberConsume
+				    	</sql>
+					</query>                                                                                       
+					<columns>
+					<column columnId="CZ" name="本月详情" editType="button" buttonCls="button" funcName="消费详情" callFunc="showConsumeDetailInfo" downloadable="false" />
+					        <column columnId="REGISTERTIME" name="注册时间" width="120" editable="true" align="center"  primaryKey="true"/>
+						    <column columnId="MEMBERID" name="会员编号" width="120" editable="true" align="center"  hidden="true"/>
+							<column columnId="MEMBERNAME" name="会员姓名" width="120" editable="true" align="center"/>
+							<column columnId="RANKNAME" name="会员等级" width="120" editable="true" align="center"/>
+							<column columnId="LOGINNAME" name="登录名" width="120" editable="true" align="left"/>
+							<column columnId="IDCARD" name="身份证" width="150" editable="true" align="left"/>
+							<column columnId="GENDOR" name="性别" width="120" editable="true" align="center"/>
+							<column columnId="MOBILE" name="手机号" width="120" editable="true" align="center"/>
+							<column columnId="EMAIL" name="邮件" width="120" editable="true" align="left"/>
+							<column columnId="ADDRESS" name="地址" width="120" editable="true" align="left"/>
+							<column columnId="CURRBALANCE" name="当前余额" width="120" editable="true" align="center" validateRule="NUMBER"/>
+							<column columnId="CURRINTEGRATION" name="当前积分" width="120" editable="true" align="center" validateRule="NUMBER"/>
+
+					</columns>
+				</page>
+				<page pageId="R90414" name="服务需求分析" loadOnRender="true">
+					<conditions>STARTDATE,ENDDATE</conditions>
+					<functions>FRESH,EXCEL</functions>
+					<funcCondRate>60,40</funcCondRate>		
+					<strategy>default</strategy>
+				  	<query type="sql">
+						<sql>
+						serviceStatistic
+				    	</sql>
+					</query>                                                                                       
+					<columns>
+						<column columnId="RECORDTIME" name="评论时间" width="120" editable="true" align="center" editType="date"/>	
+						<column columnId="BRANCHNAME" name="门店名称" width="120" editable="true" align="center"/>
+						<column columnId="MEMBERNAME" name="会员名称" width="120" editable="true" align="center"/>
+						<column columnId="SSCORE" name="服务评分" width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="FSCORE" name="设施评分" width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="ESCORE" name="环境评分" width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="LSCORE" name="位置评分" width="120" editable="true" align="center" validateRule="NUMBER"/>
+						<column columnId="CCONTENT" name="评论内容" width="120" editable="true" />
+						<column columnId="REMARK" name="备注" width="120" editable="true" align="center"/>
+
+					</columns>
+				</page>
+
+<!--				<page pageId="R90416" name="综合报表" loadOnRender="true">-->
+<!--					<tabs></tabs>-->
+<!--				</page>-->
+<!--				-->
+<!--				<page pageId="" name="商品"  tab="true" containerId="R90414" >-->
+<!--					<strategy>default</strategy>-->
+<!--					<functions>EXCEL,FRESH</functions>-->
+<!--					<conditions>STARTMONTH,ENDMONTH,GOODBRANCHID</conditions>-->
+<!--					-->
+<!--					<query type="sql">-->
+<!--						<sql>-->
+<!--				    goodsSaleRate-->
+<!--						</sql>-->
+<!--					</query>-->
+<!--					<columns>-->
+<!--						<column columnId="RECORDTIME" name="销售月份" width="120" editable="true" align="center" />-->
+<!--                        <column columnId="BRANCHNAME" name="门店名称" width="120" editable="true" align="center"/>-->
+<!--                        <column columnId="GOODSNAME" name="商品名称" width="120" editable="true" align="center"/>-->
+<!--                        <column columnId="CB" name="商品成本(元)" width="120" editable="true" align="center" />-->
+<!--                        <column columnId="REALFEE" name="销售金额（元）" width="120" editable="true" align="center" />-->
+<!--                        <column columnId="LR" name="利润(元)" width="120" editable="true" align="center" />-->
+<!--                        <column columnId="LRRATE" name="利润增长率（环比）" width="120" editable="true" align="center"/>-->
+<!--                        <column columnId="XSZERATE" name="销售额增长率（环比）" width="120" editable="true" align="center"/>-->
+<!---->
+<!--					</columns>-->
+<!--				</page>-->
+<!--				<page pageId="" name="房间"  tab="true" containerId="R90414" loadOnRender="true">-->
+<!--					<funcCondRate>30,70</funcCondRate>-->
+<!--					<strategy>default</strategy>-->
+<!--					<functions>EXCEL,FRESH</functions>-->
+<!--					<conditions>STARTMONTH,ENDMONTH,GOODBRANCHID</conditions>-->
+<!--					<query type="sql">-->
+<!--						<sql>-->
+<!--						-->
+<!--						</sql>-->
+<!--					</query>-->
+<!--					<columns>-->
+<!--						<column columnId="" name="销售月份" width="120" editable="true" align="center" />-->
+<!--                        <column columnId="" name="门店名称" width="120" editable="true" align="center"/>-->
+<!--                        <column columnId="CB" name="水电费成本(元)" width="120" editable="true" align="center" />-->
+<!--                        <column columnId="REALFEE" name="销售金额（元）" width="120" editable="true" align="center" />-->
+<!--                        <column columnId="LR" name="总利润(元)" width="120" editable="true" align="center" />-->
+<!--                        <column columnId="LRRATE" name="环比利润增长率" width="120" editable="true" align="center"/>-->
+<!--                        <column columnId="BT_REALFEE" name="环比销售增长额（元）" width="120" editable="true" align="center" />-->
+<!--                        <column columnId="XSZERATE" name="环比销售总额增长率" width="120" editable="true" align="center"/>-->
+<!--					</columns>-->
+<!--				</page>-->
+			</model>
+		</models>
+	</config>
+</configs>			
+			

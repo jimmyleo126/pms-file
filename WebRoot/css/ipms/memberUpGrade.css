@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+
+.membercard{
+	margin: 5px;
+    height: 40px;
+    width: 80%;
+    padding-left: 5px;
+}
+.membercard_td_one{
+	text-align:right;
+    width: 20%;
+}
+.submit,.cancel{
+	height: 34px;
+    line-height: 31px;
+    text-align: center;
+    width: 80px;
+    border: 1px solid #CCCCCC;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    border-radius: 2px;
+    float:right;
+    margin:4px;
+    
+}
+.submit:hover,.cancel:hover{
+	background:#4A5064;
+	color:#fff;
+}
+.table_account tr td:nth-child(odd){
+	text-align:center;
+}
+.table_account tr td:nth-child(even){
+	text-align:left;
+}

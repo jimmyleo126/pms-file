@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+	<config>
+		<models>
+			<model modelId="M801" name="后台管理" show="true" icon="audit" subSystem="crm">
+			     <page pageId="R80101" name="班次时刻表" editing="form" loadOnRender="true"
+					show="false">
+					<url>turnToShiftTime</url>
+				 </page>
+				 
+				 <page pageId="R80102" name="钱柜管理" editing="form" loadOnRender="true" showMenu="true">
+					<conditions>ROOMBRANCH,CASHBOX,CASHSTATUS</conditions>
+					<functions>FRESH,EDIT</functions>
+					<funcCondRate>40,59</funcCondRate>
+					<requiredData>CASHBOXSELECT</requiredData>
+					<strategy>default</strategy>
+					<target>CashBox</target>					
+					<query type="sql">
+					<sql>
+					  cashdata
+                    </sql>
+					</query>
+					<dataFormats>
+					    <sql name="CASHBOXSELECT">
+							cashboxselect
+						</sql>
+					</dataFormats> 
+					<columns>
+					    <column columnId="BRANCHID" name="门店" complexKey="CashKey" editable="true" editType="dialog-radio" dialogTarget="Branch" dialogColumns="branchId,branchName" dialogConditions=" branchId like decode($BRANCHID,'100001','%',$BRANCHID)" validateRule="NOTNULL" />
+					    <column columnId="CASHBOX" name="钱柜"  complexKey="CashKey" editable="true" editType="select" value="CASHBOXSELECT"  validateRule="NOTNULL" />
+					    <column columnId="CASHCOUNT" name="金额" editable="true" editType="NUMBER" validateRule="NOTNULL,LENGTH:12"/>
+						<column columnId="CASHSTATUS" name="钱柜状态"  editable="true" editType="select" editValue="0:待用;1:在用" validateRule="NOTNULL"/>
+						<column columnId="RECORDUSER" name="录入人" hidden="true" editable="false" editType="dialog" dialogTarget="Staff" dialogColumns="staffId,staffName"  downloadable="false"/>
+						<column columnId="RECORDTIME" name="录入时间" hidden="true" editable="false" editType="date" downloadable="false"/>
+						<column columnId="STATUS" name="状态" editable="true" editType="select" editValue="1:有效;0:失效" validateRule="NOTNULL" />
+						<column columnId="REMARK" name="备注" editType="textarea" editable="true" validateRule="LENGTH:200"/>
+					</columns>
+				  </page>
+				  
+				   <page pageId="R80103" name="备用金修改" editing="line" noShrink="true" loadOnRender="true" showMenu="true">
+					<conditions></conditions>
+					<functions>FRESH,RPSAVE</functions>
+					<funcCondRate>40,60</funcCondRate>
+					<requiredData>CASHBOXSELECT</requiredData>
+					<strategy>default</strategy>
+					<target>PettyCash</target>					
+					<query type="sql">
+					<sql>
+					 pettycashdata
+                    </sql>
+					</query>
+					<dataFormats>
+					    <sql name="CASHBOXSELECT">
+							cashboxselect
+						</sql>
+					</dataFormats> 
+					<columns>
+					    <column columnId="LOGID" name="日志号" hidden="true" editable="false" validateRule="NOTNULL" />
+					    <column columnId="RECORDTIME" name="操作时间" editable="false" width="200" editType="date"/>
+					    <column columnId="HANDUSER" name="交接人"  editable="false" editType="dialog-radio" dialogTarget="Staff" dialogColumns="staffId,staffName" />
+						<column columnId="CONFIRMUSER" name="确认人" editable="false" editType="dialog-radio" dialogTarget="Staff" dialogColumns="staffId,staffName"/>
+					    <column columnId="BRANCHID" name="门店" editable="false" editType="dialog-radio" dialogTarget="Branch" dialogColumns="branchId,branchName"  validateRule="NOTNULL" />
+					    <column columnId="SHIFT" name="班次" editable="false" editType="dialog-radio" dialogTarget="SysParam" dialogColumns="content,paramName" dialogConditions="PARAM_TYPE = 'SHIFT' " validateRule="NOTNULL"/>
+						<column columnId="CASHBOX" name="金柜"  editable="true"  editType="select" value="CASHBOXSELECT" validateRule="NOTNULL"/>
+						<column columnId="CASHIN" name="现金收入" editable="true" editType="Number" validateRule="NOTNULL" />
+						<column columnId="CASHOUT" name="现金支出"  editable="true" editType="Number" validateRule="NOTNULL"/>
+						<column columnId="PAYMENTVALUE" name="投缴金额"  editable="true" editType="Number" validateRule="NOTNULL"/>
+						<column columnId="SHIFTVALUE" name="备用金交接" editable="true" editType="Number" validateRule="NOTNULL"/>
+						<column columnId="LASTSHIFTVALUE" name="补上班次" editable="true" editType="Number" validateRule="NOTNULL"/>
+						<column columnId="CURRSHIFTVALUE" name="本班需补" editable="true" editType="Number" validateRule="NOTNULL"/>
+						<column columnId="CARDBALANCE" name="银行卡收入"  editable="true" editType="Number" validateRule="NOTNULL"/>
+						<column columnId="CARDS" name="银行卡笔数"  editable="true"/>
+						<column columnId="DEPOSITNO" name="押金收据"  editable="true"/>
+						<column columnId="INVOICENO" name="发票号"  editable="true"/>
+						<column columnId="STATUS" name="状态" hidden="true" editable="false" editValue="1:有效;0:已删除" editType="select" downloadable="false"/>
+						<column columnId="RECORDUSER" name="操作人" editable="false" hidden="true" editType="dialog-radio" dialogTarget="Staff" dialogColumns="staffId,staffName" validateRule="LENGTH:200"/>
+						<column columnId="REMARK" name="备注" editable="true" validateRule="LENGTH:200"/>
+					</columns>
+				  </page>
+				 
+				 <page pageId="R80104" name="房间管理" editing="form" editFunc="editrpRow" loadOnRender="true" showMenu="true">
+					<conditions>ROOMBRANCH,ROOMTHEME,ROOMTYPE,RMSTATUS,RMID,RMFLOOR</conditions>
+					<functions>FRESH,EDIT</functions>
+					<funcCondRate>50,49</funcCondRate>
+					<strategy>default</strategy>
+					<requiredData>ROOMSTATUS,SSS</requiredData>
+					<target>Room</target>
+					<delFunc>delRoom</delFunc>
+					<query type="sql">
+						<sql>pmsroomdata</sql>
+					</query>
+					<dataFormats>
+					    <sql name="ROOMSTATUS">
+							roomstatusselect
+						</sql>
+						<sql name="THEME">
+							select room_type value, room_name label from tp_p_roomtype where theme = :THEME
+						</sql>
+						<sql name="SSS">
+							sss
+						</sql>
+					</dataFormats> 
+					<columns>
+					    <column columnId="THEME" name="场景" width="80" editable="true"   editType="select" editValue="null:请选择场景;1:酒店;2:公寓;3:民宿" dataEvent="MULTI:ROOMTYPE" eventRule="THEME"/>
+					    <column columnId="BRANCHID" name="门店" complexKey="RoomKey" editable="true" editType="dialog" dialogTarget="Branch" dialogColumns="branchId,branchName"  validateRule="NOTNULL" />
+					    <column columnId="ROOMTYPE" name="房型" editable="true" editType="select" value="SSS" validateRule="NOTNULL" />
+					    <column columnId="FLOOR" name="楼层" editable="true" validateRule="NOTNULL,LENGTH:2"/>
+						<column columnId="ROOMID" name="房号" complexKey="RoomKey" editable="true" validateRule="NOTNULL,LENGTH:6"/>
+						<column columnId="AREA" name="面积" editable="true" validateRule="LENGTH:3"/>
+						<column columnId="STATUS" name="状态" editable="true" editType="select" value="ROOMSTATUS" validateRule="NOTNULL" />
+						<column columnId="RECORDTIME" name="录入时间"  editable="false" editType="date" downloadable="false"/>
+						<column columnId="REMARK" name="备注" editType="textarea" editable="true" validateRule="LENGTH:200"/>
+					</columns>
+				  </page>
+				 
+				  <page pageId="R80105" name="房价管理" editing="form" loadOnRender="true" showMenu="true">
+					<conditions>ROOMBRANCH,ROOMTHEME,ROOMTYPE,RPID,RPIDSTATUS,RPSTATUS,RPKIND</conditions>
+					<functions>RPINITIALIZE,FRESH,DELETE</functions>
+					<funcCondRate>50,49</funcCondRate>
+					<strategy>default</strategy>
+					<target>RoomPrice</target>
+					<delFunc>delRoomPrice</delFunc>
+					<query type="sql">
+					<sql>pmsroomprice</sql>
+					</query>
+					<columns>
+					    <column columnId="CZ1" name="提价调整" editType="button" buttonCls="button" funcName="提价调整" callFunc="rpApply" downloadable="false" />
+					    <column columnId="THEME" name="场景" width="80" editable="true" editType="dialog-radio" dialogTarget="SysParam" dialogColumns="content,paramName" dialogConditions="PARAM_TYPE = 'THEME' "/>
+					    <column columnId="BRANCHID" name="门店" complexKey="RoomPriceId" editable="true" editType="dialog-radio" dialogTarget="Branch" dialogColumns="branchId,branchName" validateRule="NOTNULL" />
+					    <column columnId="RPKIND" name="房价类型" complexKey="RoomPriceId" editable="true" editType="dialog-radio" dialogTarget="SysParam" dialogColumns="content,paramName" dialogConditions="PARAM_TYPE = 'RPKIND' " validateRule="NOTNULL" />
+					    <column columnId="ROOMTYPE" name="房型" complexKey="RoomPriceId" editable="true" editType="dialog-radio" dialogTarget="RoomType" dialogColumns="roomType,roomName" validateRule="NOTNULL" />
+						<column columnId="RPID" name="房价码编号" complexKey="RoomPriceId" editable="true" />
+						<column columnId="RPNAME" name="房价码名称" editable="true" validateRule="NOTNULL"  />
+						<column columnId="ROOMPRICE" name="房价" editable="true" />
+						<column columnId="RPTYPE" name="房价码类型" editable="true" editType="dialog-radio" dialogTarget="SysParam" dialogColumns="content,paramName" dialogConditions="PARAM_TYPE = 'RPTYPE' "/>
+						<column columnId="PACKID" name="包价" editable="true" />
+						<column columnId="DISCOUNT" name="优惠" editable="true" />
+						<column columnId="RECORDUSER" name="录入人" hidden="true" editType="dialog" dialogTarget="Staff" dialogColumns="staffId,staffName" editable="false" downloadable="false"/>
+						<column columnId="RECORDTIME" name="录入时间" hidden="true" editable="true" editType="date" downloadable="false"/>
+						<column columnId="STATUS" name="状态"  editable="true" editType="dialog-radio" dialogTarget="SysParam" dialogColumns="content,paramName" dialogConditions="PARAM_TYPE = 'RPSTATUS' " validateRule="NOTNULL" />
+						<column columnId="REMARK" name="备注" editType="textarea" editable="true" validateRule="LENGTH:200" />
+					</columns>
+				  </page>
+				  
+			</model>
+		</models>
+	</config>
+</configs>

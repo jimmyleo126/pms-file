@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+td{
+	text-align: center;
+}
+table tr td input{
+	margin: 5px;
+	height: 40px;
+	width: 70%;
+	padding-left:5px;
+}
+.submit,.cancel{
+	height: 34px;
+    line-height: 31px;
+    text-align: center;
+    width: 80px;
+    border: 1px solid #CCCCCC;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    border-radius:4px;
+    float:right;
+    margin:4px;
+    
+}
+.submit:hover,.cancel:hover{
+	background:#4A5064;
+	color:#fff;
+}
+/*储蓄卡充值*/
+.table_account tr td:nth-child(odd){
+	width:2%;
+	text-align:right;
+}
+.table_account tr td:nth-child(even){
+	width:15%;
+	text-align:left;
+}
+.div_img{
+	height: 15px;
+}
+.div_img:hover{
+	background:#4A5064;
+	color:#fff;
+}
+.div_desc{
+    margin: 20px 120px;
+}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+	<config>
+		<models>
+			<model modelId="M901" name="门店管理" show="true" icon="stores" subSystem="crm">
+				<page pageId="R90101" name="门店管理" editing="form" loadOnRender="true" showMenu="true" >
+					<conditions>GOODBRANCHID,MOBILE,CITY,DISTRICT,STREET,CIRCLE,ZT</conditions>
+					<functions>FRESH,EDIT</functions>
+					<target>Branch</target>
+					<strategy>default</strategy>
+					<funcCondRate>30,70</funcCondRate>
+					<query type="sql">
+						<sql>branchmanage</sql>
+					</query>
+					<columns>
+						<column columnId="BRANCHID" name="分店编号"  hidden="true"  primaryKey="true" sequence="SEQ_NEW_BRANCHID" />
+						<column columnId="BRANCHNAME" name="分店名"  editable="true" validateRule="NOTNULL,LENGTH:15"/>
+						<column columnId="BRANCHTYPE" name="分店类型" editType="select"   editValue="1:酒店;2:公寓;3:民宿 " 
+								editable="true" align="center" validateRule="NOTNULL,LENGTH:1"/>
+						<column columnId="CITY" name="城市" editType="dialog" editable="true" align="center"  validateRule="NOTNULL"
+								dialogTarget="City" dialogColumns="adminiCode,adminiName" dialogConditions="rank = '1' "/>
+						<column columnId="DISTRICT" name="区" editable="true" align="center" editType="dialog" validateRule="NOTNULL"
+								dialogTarget="City" dialogColumns="adminiCode,adminiName" dialogConditions="rank = '2' "/>
+						<column columnId="PHONE" name="座机"  editable="true" validateRule="NOTNULL,LENGTH:13"/>
+						<column columnId="POSTCODE" name="邮编"  editable="true"  validateRule="NOTNULL,LENGTH:13"/>
+						<column columnId="CONTACTS" name="联系人"  editable="true"  validateRule="NOTNULL,LENGTH:13"/>
+						<column columnId="MOBILE" name="手机"  editable="true"  validateRule="NOTNULL,MOBILE"/>
+						<column columnId="ADDRESS" name="详细地址"  editable="true"  validateRule="NOTNULL,LENGTH:60"/>						
+						<column columnId="STREET" name="街道" editable="true" align="center" editType="dialog" 
+								dialogTarget="City" dialogColumns="adminiCode,adminiName" dialogConditions="rank = '3' "/>
+						<column columnId="CIRCLE" name="商业圈" editable="true" align="center" editType="dialog" 
+								dialogTarget="City" dialogColumns="adminiCode,adminiName" dialogConditions="rank = '4' "/>
+						<column columnId="STATUS" name="状态	"  hidden="true" editType="select" editValue="1:有效;0:已删除 " validateRule="NOTNULL,LENGTH:1"/>
+						<column columnId="RECORDTIME" name="录入时间" edithidden="true" editable="true" editType="datetime" hidden="true"/>
+						<column columnId="REMARK" name="备注" editType="textarea" editable="true"/>
+					</columns>
+				</page>
+				<page pageId="R90102" name="供应商资料" editing="form" loadOnRender="true" showMenu="true" >
+					<conditions>SUPPLIERNAME,CONTRACT,SUPPILERSTATUS</conditions>
+					<functions>FRESH,EDIT</functions>
+					<target>Supplier</target>
+					<strategy>default</strategy>
+					<query type="sql">
+						<sql>supplierQuery</sql>
+					</query>
+					<columns>						
+						<column columnId="SUPPLIERID" name="供应商编号" width="120"  align="center" hidden="true" primaryKey="true" sequence="SEQ_NEW_SUPPLIERID"/>
+						<column columnId="SUPPLIERNAME" name="供应商名" width="120" editable="true" align="center" validateRule="NOTNULL,LENGTH:15"/>
+						<column columnId="ADDRESS" name="详细地址" width="140" editable="true" align="left" validateRule="NOTNULL,LENGTH:30"/>
+						<column columnId="PHONE" name="座机" width="100" editable="true" align="center" validateRule="NOTNULL,LENGTH:13"/>
+						<column columnId="POSTCODE" name="邮编" width="100" editable="true" align="center" validateRule="NOTNULL,LENGTH:6,NUMBER"/>
+						<column columnId="CONTACTS" name="联系人" width="100" editable="true" align="center" validateRule="NOTNULL,LENGTH:5"/>
+						<column columnId="MOBILE" name="手机" width="100" editable="true" align="center" validateRule="NUMBER,LENGTH:11"/>
+						<column columnId="RECORDUSER" name="录入人" width="80" editable="false" align="center" hidden="true"/>
+						<column columnId="RECORDTIME" name="录入时间" width="80" editable="true" edithidden="true" align="center" editType="datetime" hidden="true"/>
+						<column columnId="STATUS" name="状态 " width="80" align="center" editValue="0:已删除;1:有效" editType="select" validateRule="NOTNULL,LENGTH:1" hidden="true"/>
+						<column columnId="REMARK" name="备注" width="240" editable="true" align="left" editType="textarea"/>	
+					</columns>
+				</page>
+			</model>
+		</models>
+	</config>
+</configs>
+				

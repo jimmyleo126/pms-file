@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+	<config>
+		<models>
+			<model modelId="M9011" name="积分管理" show="true" icon="integrals" subSystem="crm"> 
+				<page pageId="R901101" name="兑换规则" editing="form" loadOnRender="true" showMenu="true">
+					<url>turnToExchangeScore</url>
+				</page>
+				
+				<page pageId="R901102" name="积分操作" editing="form" loadOnRender="true" showMenu="true">
+					<conditions>MEMBERNAME,IDCARD,MOBILE</conditions>
+					<functions>FRESH</functions>
+					<target>MemberAccount</target>
+					<strategy>default</strategy>
+				  	<query type="sql">
+						<sql>
+							Integrationmanage
+				    	</sql>
+					</query>
+					<columns>
+						<column columnId="CZ1" name="积分调整" width="90" editable="true"  
+								editType="button" buttonCls="button_first" funcName="调整" callFunc="scoreAdjustment"  downloadable="false"/>
+						<column columnId="ACCOUNTID" name="账户编号" width="120" editable="true" hidden="true"/>
+						<column columnId="MEMBERID" name="会员编号" width="120" editable="true" primaryKey="true" validateRule="NOTNULL"/>
+						<column columnId="LOGINNAME" name="登录名" width="120" editable="true" validateRule="NOTNULL,LENGTH:20,UNIQUE"/>
+						<column columnId="MEMBERNAME" name="会员姓名" width="120" editable="true" validateRule="NOTNULL,LENGTH:20"/>
+						<column columnId="GENDOR" name="性别" width="120" editable="true" editValue="0:女;1:男" editType="select" validateRule="NOTNULL"/>
+						<column columnId="MEMBERRANK" name="会员等级" width="120" editable="true"/>
+						<column columnId="IDCARD" name="身份证" width="120" editable="true" align="left" hidden="true"/>
+						<column columnId="MOBILE" name="手机号" width="120" editable="true" align="left" hidden="true"/>
+						<column columnId="CURRINTEGRATION" name="当前积分" width="120" editable="true"/>
+						<column columnId="TOTALINTEGRATION" name="获取积分" editable="true"/>
+						<column columnId="INGEGRATIONGIFT" name="积分赠送" editable="true"/>
+						<column columnId="TOTALCONSINTEGRATION" name="消费积分" editable="true"/>
+						<column columnId="CURRBALANCE" name="当前余额" width="120" editable="true"/>
+						<column columnId="EMAIL" name="邮件" width="120" editable="true" hidden="true"/>
+						<column columnId="ADDRESS" name="地址" width="120" editable="true" align="left" hidden="true"/>
+					</columns>
+				</page>
+			</model>
+		</models>
+	</config>
+</configs>

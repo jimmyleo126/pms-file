@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+	<config>
+		<models>
+			<model modelId="M903" name="会员管理" show="true" icon="member" subSystem="crm">
+				<page pageId="R90301" name="会员等级" editing="form" loadOnRender="true" showMenu="true">
+					<conditions>MEMBER_RANK_NAME</conditions>
+					<functions>FRESH,EDIT</functions><!-- EXCEL -->
+					<target>MemberRank</target>
+					<strategy>default</strategy>
+				  	<query type="sql">
+						<sql>
+							memberrankmanage
+				    	</sql>
+					</query>
+					<columns>
+						<column columnId="MEMBERRANKID" name="会员级别编号" hidden="true" primaryKey="true" downloadable="false" sequence="SEQ_MEMBER_RANK_ID"/>
+						<column columnId="MEMBERRANK" name="会员级别" editable="true" validateRule="NOTNULL,UNIQUE" readonly="true"/>
+						<column columnId="RANKNAME" name="级别名" editable="true" validateRule="NOTNULL"/>
+						<column columnId="DISCOUNT" name="折扣" editable="true" validateRule="NOTNULL,NUMBER"/>
+						<!-- <column columnId="RECORDTIME" name="录入时间" editable="true" hidden="true" editType="date" validateRule="NOTNULL" readOnly="true"/> -->
+						<column columnId="STATUS" name="状态" hidden="true" editValue="1:有效;0:已删除" edithidden="true"
+						 editType="select" editable="true" validateRule="NOTNULL"/>
+						<column columnId="REMARK" name="备注" editable="true" editType="textarea" validateRule="LENGTH:200" align="left"/>
+					</columns>
+				</page>
+				<page pageId="R90302" name="会员资料" editing="form" loadOnRender="true" showMenu="true">
+					<conditions>MEMBERNAME,IDCARD,MOBILE,MEMBERSTATUS</conditions>
+					<functions>FRESH,EDIT,EXCEL</functions>
+					<requiredData>MEMBERRANK</requiredData>
+					<target>Member</target>
+					<formSubmitUrl>saveMember</formSubmitUrl>
+					<delFunc>delMember</delFunc>
+					<strategy>default</strategy>
+				  	<query type="sql">
+						<sql>
+							membermanage
+				    	</sql>
+					</query>
+					<dataFormats>
+						<sql name="MEMBERRANK">
+							selectmemberrank
+						</sql>
+						<sql name="EXCEL">
+							memberexcel
+						</sql>
+					</dataFormats>
+					<columns>
+						<column columnId="MEMBERID" name="会员编号" hidden="true" primaryKey="true" downloadable="false" sequence="SEQ_MEMBER_ID"/>
+						<column columnId="PHOTOS" name="照片" editable="true" downloadable="false" editType="file" showImage="true"/>
+						<column columnId="OPENID" name="微信号" editable="true" edithidden="true" hidden="true" downloadable="false"/>
+						<column columnId="RECOMMEND" name="推荐人" editable="true" edithidden="true" hidden="true" downloadable="false"/>
+						<column columnId="MEMBERNAME" name="会员姓名" width="100" editable="true" validateRule="NOTNULL,LENGTH:20,UNIQUE"/>
+						<column columnId="LOGINNAME" name="登录名" editable="true" validateRule="NOTNULL,LENGTH:20,UNIQUE"/>
+						<!-- <column columnId="PASSWORD" name="密码" editable="true" hidden="true" validateRule="NOTNULL"/> -->
+						<column columnId="PASSWORD" name="密码" edithidden="true" editable="true" hidden="true" downloadable="false"/>
+						<column columnId="MEMBERRANK" name="会员等级" editable="true"  editType="select" value="MEMBERRANK"/><!-- value="MEMBERRANK" -->
+						<column columnId="IDCARD" name="身份证" width="200" editable="true" validateRule="NOTNULL,IDCARD,UNIQUE"/>
+						<column columnId="GENDOR" name="性别" width="50" editable="true" editValue="0:女;1:男" editType="select"/>
+						<column columnId="BIRTHDAY" name="生日" editable="true" editType="date"/>
+						<column columnId="MOBILE" name="手机号" editable="true" validateRule="NOTNULL,MOBILE,UNIQUE"/>
+						<column columnId="EMAIL" name="邮件" width="150" editable="true" validateRule="EMAIL"/>
+						<column columnId="ADDRESS" name="地址" editable="true" />
+						<column columnId="POSTCODE" name="邮编" editable="true" validateRule="NUMBER,LENGTH:6"/>
+						<column columnId="SOURCE" name="来源" editable="true"
+						 editValue="1:官网渠道注册;2:微信公众号;3:IOS端;4:Android端;5:实体卡;6:商务卡" editType="select" hidden="true"/>
+						<column columnId="REGISTERTIME" name="注册时间" editable="true" edithidden="true" hidden="true" editType="date" downloadable="false"/>
+						<column columnId="VALIDTIME" name="生效时间" editable="true" edithidden="true" hidden="true" editType="date"  downloadable="false"/>
+						<column columnId="INVALIDTIME" name="失效时间" editable="true" edithidden="true" hidden="true" editType="date" downloadable="false"/>
+						<column columnId="RECORDTIME" name="录入时间" editable="true" edithidden="true" hidden="true" editType="date" downloadable="false"/>
+						<column columnId="STATUS" name="状态	" editable="true" hidden="true" editType="select" editValue="1:有效;0:已删除 "/>
+						<column columnId="REMARK" name="备注" editable="true" editType="textarea" validateRule="LENGTH:200" align="left"/>
+					</columns>
+				</page>
+				<page pageId="R90303" name="会员查询" editing="form" loadOnRender="true" showMenu="true">
+					<conditions>MEMBERNAME,MEMBERSTATUS</conditions>
+					<functions>FRESH</functions>
+					<target>MemberAccount</target>
+					<strategy>default</strategy>
+				  	<query type="sql">
+						<sql>
+							memberaccountmanage
+				    	</sql>
+					</query>
+					<columns>
+						<column columnId="CZ1" name="充值" width="90" editable="true"  
+								editType="button" buttonCls="button_first" funcName="充值" callFunc="cardRecharge"  downloadable="false"/>
+						<column columnId="ACCOUNT_ID" name="升级" width="90" editable="true" 
+								editType="button" buttonCls="button_second" funcName="升级" callFunc="memberUpGrade"  downloadable="false"/>
+						<column columnId="ACCOUNTID" name="账户编号" editable="true" hidden="true" primaryKey="true"/>
+						<column columnId="MEMBERID" name="编号" hidden="true" editable="true"/>
+						<column columnId="MEMBER_NAME" name="姓名" editable="true"/>
+						<column columnId="CURRBALANCE" name="余额" editable="true" validateRule="NUMBER"/>
+						<column columnId="CURRINTEGRATION" name="积分" editable="true" validateRule="NUMBER"/>
+						<column columnId="TOTALRECHARGE" name="充值金额" editable="true" validateRule="NUMBER"/>
+						<column columnId="DISCOUNTGIFT" name="折扣赠送" editable="true" validateRule="NUMBER"/>
+						<column columnId="CHARGEGIFT" name="充值赠送" editable="true" validateRule="NUMBER"/>
+						<column columnId="TOTALCONSUME" name="消费金额" editable="true" validateRule="NUMBER"/>
+						<column columnId="TOTALINTEGRATION" name="获取积分" editable="true" validateRule="NUMBER"/>
+						<column columnId="INGEGRATIONGIFT" name="积分赠送" editable="true" validateRule="NUMBER"/>
+						<column columnId="TOTALCONSINTEGRATION" name="消费积分" editable="true" validateRule="NUMBER"/>
+						<column columnId="TOTALROOMNIGHTS" name="总房晚" editable="true" validateRule="NUMBER"/>
+						<column columnId="CURRROOMNIGHTS" name="当前房晚" editable="true" validateRule="NUMBER"/>
+						<column columnId="TOTALNOSHOW" name="总未现天数" editable="true" validateRule="NUMBER"/>
+						<column columnId="CURRNOSHOW" name="当前未现数" editable="true" validateRule="NUMBER"/>
+						<column columnId="RECORDTIME" name="录入时间" editable="true" hidden="true" editType="date"/>
+						<column columnId="STATUS" name="状态" editValue="1:有效;0:已删除" hidden="true" editType="select" editable="true"/>
+					</columns>
+				</page>
+				<page pageId="R90304" name="合同管理" editing="form" loadOnRender="true" showMenu="true">
+					<conditions>MOBILE,MEMBERSTATUS</conditions>
+					<functions>FRESH,EDIT</functions>
+					<target>Contrart</target>
+					<formSubmitUrl>saveContrart</formSubmitUrl>
+					<delFunc>delContrart</delFunc>
+					<strategy>default</strategy>
+				  	<query type="sql">
+						<sql>
+							queryContrart
+				    	</sql>
+					</query>
+					<columns>
+						<column columnId="CZ1" name="查看" width="90" editable="true" 
+								editType="button" buttonCls="button_first" funcName="查看" callFunc="querycontract"  downloadable="false"/>
+						<column columnId="CONTRARTID" name="续费" width="90" editable="true" 
+								editType="button" buttonCls="button_first" funcName="续费" callFunc="rentRenewal"  downloadable="false"/>
+						<column columnId="CONTRARTID" name="编号" hidden="true" primaryKey="true"/>
+						<column columnId="CONTRART" name="合同" editable="true" hidden="true" editType="file" validateRule="NOTNULL" />
+						<column columnId="MEMBERID" name="合同人" editable="true" editType="dialog-radio" dialogTarget="Member" dialogColumns="memberId,memberName" dialogConditions="STATUS = '1' " validateRule="NOTNULL" />
+						<column columnId="ROOMID" name="房间号" editable="true" editType="dialog-radio" dialogTarget="Room" dialogColumns="roomKey.roomId,roomKey.roomId" dialogConditions="roomKey.branchId = $BRANCHID" validateRule="NOTNULL" />
+						<column columnId="ROOMTYPE" name="房间类型" editable="true" editType="dialog-radio" dialogTarget="RoomType" dialogColumns="roomType,roomName" dialogConditions="STATUS = '1' " validateRule="NOTNULL" />
+						<column columnId="MOBILE" name="手机" editable="true" validateRule="NOTNULL,MOBILE" />
+						<column columnId="BRANCHID" name="门店" editable="true" editType="dialog-radio" dialogTarget="Branch" dialogColumns="branchId,branchName" dialogConditions="STATUS = '1' and branchId = $BRANCHID" validateRule="NOTNULL" />
+						<column columnId="TYPEOFPAYMENT" name="租赁方式" width="50" editable="true" editValue="1:月付;3:季付;6:半年付;12:年付" editType="select"/>
+						<column columnId="UNITPRICE" name="单价" editable="true" validateRule="NOTNULL,NUMBER,LENGTH:6" />
+						<column columnId="STATUS" name="状态	" editable="true" edithidden="true" hidden="true" editType="select" editValue="1:有效;0:已删除 "/>
+						<column columnId="RECORDTIME" name="录入时间" editable="true" edithidden="true" hidden="true" editType="date"/>
+						<column columnId="STARTTIME" name="开始时间" editable="true" editType="date" validateRule="NOTNULL" />
+						<column columnId="ENDTIME" name="结束时间" editable="true" editType="date" validateRule="NOTNULL" />
+						<column columnId="CONTRARTENDTIME" name="房租到期" editable="true" editType="date" validateRule="NOTNULL" />
+					</columns>
+				</page>
+			</model>
+		</models>
+	</config>
+</configs>

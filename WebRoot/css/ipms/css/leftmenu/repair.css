@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+    height: 620px;
+}
+/*维修*/
+.repair_margin .search_style ul li{
+	float:left;
+	line-height:35px;
+	margin-left:10px;
+}

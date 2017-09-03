@@ -1,0 +1,337 @@
+body,
+html {
+	height: 100%;
+	font-family: "微软雅黑";
+}
+* {
+	
+}
+/*登录背景图开始*/
+#home-banner button{
+	border:none;
+}
+#home-banner {
+	clear: both;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+}
+
+#banner-list {
+	clear: both;
+	width: 1920px;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -960px;
+	right: auto;
+	bottom: 0;
+	background: #000;
+}
+
+#home-banner img {
+	margin-left: -120px;
+}
+
+.banner-list img.box-img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+}
+/*登录背景图结束*/
+/*内容区域开始*/
+/*登录区域开始*/
+/**/
+/**/
+.showclasses{
+	font-size: 14px;
+    text-align: right;
+    letter-spacing: 2px;
+       height: 30px;
+   		line-height: 30px;
+}
+.showclasses span{
+	color:#333;
+	margin-right:20px;
+}
+.showclasses .red{
+	color:#FF0000;
+}
+.loginReg-viewbox,
+.top-content {
+	clear: both;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.login-margin {
+	position: relative;
+   top: 22%;
+   margin-left: auto;
+   margin-right: auto;
+   padding-top: 20px;
+}
+
+.login-weight {
+	width: 954px;
+	height: 436px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px 0px rgba(94, 94, 94, 0.50);
+    border-radius: 4px;
+    position: absolute;
+    left: 476px;
+    top: 257px;
+}
+
+.loginReg-viewbox .loginReg-panel {
+	width: 428px;
+	height: 377px;
+	margin: 0 auto;
+	float: right;
+	border-left: 1px solid #DDDDDD;
+    padding-top: 22px;
+}
+
+.loginReg-panel .design-img {
+	margin-bottom: 14px;
+   height: 42px;
+   line-height: 42px;
+   margin-top: 17px;
+}
+.design-img  span{
+    font-size: 28px;
+    color: #666;
+    text-align: left;
+    position: absolute;
+    right:178px;
+    letter-spacing: 2px;
+}
+.formView {
+ 	padding-left: 60px;
+}
+
+.loginReg-panel .form-group {
+	position: relative;
+	margin-bottom: 29px;
+}
+
+.loginReg-viewbox .loginReg-panel .formView .inputTit {
+	width: 85px;
+	text-align: center;
+	height: 48px;
+	line-height: 45px;
+	font-weight: normal;
+	font-size: 16px;
+   	font-family: "微软雅黑";
+	position: absolute;
+	left: 0;
+	top: 0;
+	color: #595758;
+}
+
+.loginReg-viewbox .loginReg-panel .formView .inputInf {
+	text-indent: 85px;
+	font-weight: normal;
+	line-height: 4.428571;
+}
+
+.form-control {
+	display: block;
+	width: 301px;
+	height: 48px;
+	font-size: 16px;
+	color: #333;
+	border-radius: 0 2px 2px 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.loginReg-viewbox .loginReg-panel .formView .btn-loginReg {
+	background: #535474;
+	border-radius: 2px;
+	width: 301px;
+	padding: 0;
+	height: 50px;
+	font-size: 16px;
+	margin-left: -68px;
+	color: #fff;
+}	
+.loginReg-viewbox .loginReg-panel .formView .btn-loginReg:hover{
+	background:#535474;
+	opacity:0.89;
+}
+/*登录区域结束*/
+/*顶部logo开始*/
+
+.top-content {
+	position: relative;
+	display: inline-flex;
+	float: right;
+	padding-right: 28px;
+	padding-top: 30px;
+	z-index: 99999;
+}
+
+
+
+.top-content .top-img {
+	margin-right: 25px;
+}
+/*顶部logo结束*/
+/*班次选择区域开始*/
+
+.loginReg-viewbox .loginReg-order {
+	width: 520px;
+	height: 208px;
+	float: left;
+	padding-top: 8%;
+    margin-bottom: 12px;
+}
+/*备用金*/
+.loginReg-cash{
+ 		 height: 189px;
+}
+.loginReg-order  > input,
+.loginReg-order  > a {
+	width: 10%;
+	height: 44px;
+	line-height: 44px;
+	cursor: pointer;
+}
+.loginReg-order  > input {
+	opacity: 0;
+	z-index: 1000;
+}
+
+
+
+.loginReg-viewbox ul {
+	height: 100%;
+	padding-left: 38px;
+	padding-top: 16px;
+	color: #206BA8;
+}
+
+.loginReg-viewbox ul li {
+	list-style: none;
+	width: 176px;
+	height: 53px;
+	line-height: 53px;
+	float: left;
+	border-radius: 4px;
+	margin-left: 30px;
+	margin-top: 28px;
+	cursor: pointer;
+}
+.loginReg-viewbox ul li input.labelauty + label{
+	font-size:16px;
+	padding: 17px 52px;
+}
+.wrapper input[type="radio"]{
+ 	opacity:0;
+}
+.loginReg-order-li{
+	background: #208ed3;
+    background: -moz-linear-gradient(top, #208ed3 0%, #0272bd 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#208ed3), color-stop(100%,#0272bd));
+    background: -webkit-linear-gradient(top, #208ed3 0%,#0272bd 100%);
+    background: -o-linear-gradient(top, #208ed3 0%,#0272bd 100%);
+    background: -ms-linear-gradient(top, #208ed3 0%,#0272bd 100%);
+    background: linear-gradient(to bottom, #208ed3 0%,#0272bd 100%);
+    color:#fff;
+}
+.formView .class_small{
+	width: 145px;
+    float: left;
+}
+.formView .option_one{
+	float: left;
+}
+/*错误信息提示*/
+.error{
+	margin-left: -64px;
+    color: #333;
+    display: none;
+    top: 57px;
+    position: absolute;
+    width: 138px;
+    background: #FFF9C9;
+    border: 1px solid #c7bf93;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px rgba(255,255,0,0.15);
+    z-index: 100;
+    font-size: 14px;
+}
+.error:before,.error:after{
+	content: "";
+    padding: 0px;
+    margin: 0px;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+}
+.error:after{
+	border-width: 10px;
+    border-style: solid;
+    border-image: initial;
+    border-color: transparent transparent #FFF9C9;
+    left: 25px;
+    top: -20px;
+}
+.error:before{
+    border-width: 10px;
+    border-style: solid;
+    border-image: initial;
+    border-color: transparent transparent #000;
+    left: 25px;
+    top: -20px;
+}
+span.fadeInDown {
+	-webkit-animation-name: fadeInDown;
+	animation-name: fadeInDown
+}
+@-webkit-keyframes fadeInDown {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-20px);
+		transform: translateY(-20px)
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0)
+	}
+}
+
+@keyframes fadeInDown {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-20px);
+		-ms-transform: translateY(-20px);
+		transform: translateY(-20px)
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		-ms-transform: translateY(0);
+		transform: translateY(0)
+	}
+}
+
+
+
+
+
+

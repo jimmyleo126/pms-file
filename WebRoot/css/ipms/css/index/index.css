@@ -1,0 +1,491 @@
+.demo {
+	padding: 2em 0;
+	transform: translate3d(0, 0, 0);
+}
+
+.img_desktop {
+    position: absolute;
+    left: 19%;
+    top: 50%;
+    margin-top: -126px;
+}
+
+.img_desktop img {
+    position: absolute;
+    border-radius: 2%;
+    top: 50%;
+    margin-top: -30px;
+    left: 50%;
+    margin-left: -300px;
+}
+.show{
+    position: absolute;
+    left: 82%;
+    top: 209px;
+    width: 100%;
+    font-size: 25px;
+}
+.img_desktop .fa-desktop {
+	font-size: 20rem;
+	color: #FFFFFF;
+}
+.demo_title {
+    position: absolute;
+    height: 50px;
+    width: 68%;
+    font-size: 40px;
+    color: rgba(255,255,255,095);
+    letter-spacing:2px;
+}
+.demo_title .name{
+	left: 394px;
+    position: absolute;
+    top: 200px;
+}
+.navbar {
+	width: 150px;
+	height: 150px;
+	line-height: 150px;
+	border-radius: 50%;
+    border: 2px solid #947A8C;
+    border-right-color: #578aad;
+    border-bottom-color: #8299a9;
+	position: relative;
+	left: 50%;
+	margin-left: 174px;
+	top: 377px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 1.75em;
+	font-weight: bold;
+	color: #444;
+	transition: 0.24s 0.2s;
+}
+.menu:before{
+   /* content: "\f007";*/
+    content: "";
+    position: absolute;
+    color: #fff;
+    font-size: 20px;
+    left: -50%;
+    margin-left: -40px;
+    top: 50%;
+    margin-top: -67px;
+}
+.menu{
+	
+}
+.navbar .navbar_close{
+	box-shadow: inset 0 0.3rem 0.2rem rgba(255, 255, 255, 0.2), inset 0 -0.3rem 0.2rem rgba(0, 0, 0, 0.2), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 4.8rem;
+    position: absolute;
+    height: 4.8rem;
+    font-size: 20px;
+    line-height: 4.8rem;
+    left: 50%;
+    margin-left: -38px;
+    top: 50%;
+    margin-top: -40px;
+    display: inline-block;
+    background: #3b5998;
+    z-index: 999;
+}
+.navbar .navbar_close.active{
+	padding-top:2px;
+    z-index: 999;
+    left: 50%;
+    margin-left: -38px;
+    top: 50%;
+    margin-top: -38px;
+}
+.row:hover .navbar{
+	
+}
+.navbar:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 225px;
+    height: 230px;
+    background: transparent;
+    border-radius: 50%;
+    border: 1px solid #FFDA2A;
+    border-right-color: #D05752;
+    border-bottom-color: #5F79E8;
+    left: 50%;
+    margin-left: -112px;
+    top: 50%;
+    margin-top: -112px;
+    animation: scope_ccw 10s linear infinite;
+    -webkit-animation: scope_ccw 10s linear infinite;
+}
+
+.navbar:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 305px;
+    height: 305px;
+    background: transparent;
+    border-radius: 50%;
+    border: 1px solid #35a3a9;
+    border-right-color: #2FD8EF;
+    border-bottom-color: #FFFFFF;
+    left: 50%;
+    margin-left: -155px;
+    top: 50%;
+    margin-top: -148px;
+    animation: scope_ccw 5s linear infinite;
+    -webkit-animation: scope_ccw 5s linear infinite;
+}
+@keyframes scope_ccw {
+	from {
+		transform: rotate(0deg)
+	}
+	to {
+		transform: rotate(360deg)
+	}
+}
+@keyframes scope_ccw {
+	from {
+		transform: rotate(360deg)
+	}
+	to {
+		transform: rotate(0deg)
+	}
+}
+.navbar:hover {
+	/**background: rgba(255, 255, 255, 0.75);*/
+}
+
+.navbar .menu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: -149px;
+	left: -166px;
+	border: 250px solid transparent;
+	cursor: default;
+	border-radius: 50%;
+	transform: scale(0);
+	transition: transform 1.4s 0.07s;
+	z-index: -1;
+}
+
+/**.navbar .menu {
+	transition: transform 0.4s 0.08s, z-index 0s 0.5s;
+	transform: scale(1);
+	z-index: 1;
+}**/
+
+.navbar .menu li {
+	position: absolute;
+	top: -169px;
+	left: -195px;
+	transform-origin: 199px 150px;
+	transition: all 0.5s 0.1s;
+}
+
+.navbar:hover .menu li {
+	transition: all 0.6s;
+}
+
+.navbar .menu li a {
+    width: 65px;
+    height: 65px;
+    line-height: 65px;
+    border-radius: 50%;
+    background: pink;
+    position: absolute;
+    font-size: 100%;
+    color: #FFFFFF;
+    transition: 0.6s;
+    box-shadow:inset 0 0.3rem 0.2rem rgba(255, 255, 255, 0.2), inset 0 -0.3rem 0.2rem rgba(0, 0, 0, 0.2), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2)
+}
+
+.navbar .menu li:nth-child(1) {
+	transition-delay: 0.02s;
+	transform: rotate(85deg);
+}
+
+.navbar .menu li:nth-child(1):before{
+	content: "PMS门店系统";
+	position: absolute;
+    left: -56px;
+    top: -83px;
+	width: 200px;
+	transform: rotate(635deg);
+	font-size: 18px;
+	font-family: "微软雅黑";
+	color:#fff;
+}
+
+.navbar .menu li:nth-child(1) a {
+	transition-delay: 0.15s;
+	transform: rotate(635deg);
+	background:#F9686A;
+}
+
+/*选择效果*/
+.navbar .menu li:nth-child(1) a.on{
+	color:#FFFFFF;
+	border: 1px solid #ecab18;
+    border-right-color: #1ad280;
+    border-bottom-color: #1ad280;
+	background-color: #41ab6b;
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+.navbar .menu li:nth-child(2) a.on{
+	background-color: #41ab6b;
+	transform: rotate(-120deg);
+	border: 1px solid #ecab18;
+    border-right-color: #1ad280;
+    border-bottom-color: #1ad280;
+	color:#FFFFFF;
+}
+.navbar .menu li:nth-child(3) a.on{
+	background-color: #41ab6b;
+	color:#FFFFFF;
+	border: 1px solid #ecab18;
+    border-right-color: #1ad280;
+    border-bottom-color: #1ad280;
+	-webkit-transform: rotate(-120deg);
+	-moz-transform: rotate(-120deg);
+	-ms-transform: rotate(-120deg);
+	transform: rotate(-120deg);
+}
+.navbar .menu li:nth-child(4) a.on{
+	background-color: #41ab6b;
+	color:#FFFFFF;
+	border: 1px solid #ecab18;
+    border-right-color: #1ad280;
+    border-bottom-color: #1ad280;
+	-webkit-transform: rotate(-180deg);
+	-moz-transform: rotate(-180deg);
+	-ms-transform: rotate(-180deg);
+	transform: rotate(-180deg);
+}
+.navbar .menu li:nth-child(6) a.on{
+	background-color: #41ab6b;
+	color:#FFFFFF;
+	border: 1px solid #ecab18;
+    border-right-color: #1ad280;
+    border-bottom-color: #1ad280;
+	-webkit-transform: rotate(-120deg);
+	-moz-transform: rotate(-120deg);
+	-ms-transform: rotate(-120deg);
+	transform: rotate(-120deg);
+}
+.navbar .menu li:nth-child(2) {
+	transition-delay: 0.04s;
+	transform: rotate(125deg);
+}
+/*FMS权限管理系统*/
+.demo .subSystem_two{
+	display: block;
+    position: absolute;
+    color: #fff;
+    width: 174px;
+    font-size: 19px;
+    top: -73px;
+    letter-spacing: 1px;
+    left: -121px;
+    transform: rotate(595deg);
+}
+.navbar .menu li:nth-child(2):after {
+	content: "";
+	position: absolute;
+    left: -135px;
+    top: -88px;
+	width: 200px;
+	transform: rotate(595deg);
+	font-size: 18px;
+	font-family: "微软雅黑";
+	color:#fff;
+}
+
+.navbar .menu li:nth-child(2) a {
+	transition-delay: 0.08s;
+	transform: rotate(595deg);
+	background:#F4B905;
+}
+
+.navbar .menu li:nth-child(3) {
+	transition-delay: 0.06s;
+	transform: rotate(165deg);
+}
+
+.navbar .menu li:nth-child(3):after {
+	content: "";
+	position: absolute;
+    left: -188px;
+    top: -20px;
+	width: 200px;
+	transform: rotate(555deg);
+	font-size: 18px;
+	color:#fff;
+	font-family: "微软雅黑";
+}
+.navbar .menu li:nth-child(3) a {
+	transition-delay: 0.12s;
+	transform: rotate(555deg);
+	background:#407FEE;
+}
+.navbar .menu li:nth-child(3) span {
+	transform: rotate(555deg);
+	top: -16px;
+    letter-spacing: 1px;
+    left: -183px;
+}
+.navbar .menu li:nth-child(4) {
+	transition-delay: 0.03s;
+	transform: rotate(166deg);
+}
+.navbar .menu li:nth-child(4) a {
+	transition-delay: 0.16s;
+	transform: rotate(553deg);
+	background:#06C9B2;
+	
+}
+.navbar .menu li:nth-child(4) span{
+	transition-delay: 0.16s;
+    transform: rotate(554deg);
+    top: -9px;
+    letter-spacing: 1px;
+    left: -185px;
+}
+.navbar .menu li:nth-child(4):after {
+	content: "";
+	position: absolute;
+	left: -151px;
+    top: 44px;
+	width: 200px;
+	transform: rotate(515deg);
+	font-size: 18px;
+	font-family: "微软雅黑"; 
+	color:#fff;
+}
+.navbar .menu li:nth-child(5) {
+	transition-delay: 0.1s;
+	transform: rotate(245deg);
+}
+
+.navbar .menu li:nth-child(5):after {
+	content: "";
+	position: absolute;
+    left: -145px;
+    top: 71px;
+	width: 200px;
+	transform: rotate(475deg);
+	font-size: 18px;
+	font-family: "微软雅黑";
+	color:#fff;
+}
+
+.navbar .menu li:nth-child(5) a {
+	transition-delay: 0.2s;
+	transform: rotate(475deg);
+	background:#99D348;
+	
+}
+
+
+.fa-ems:before {
+	content: "\f013"
+}
+
+.fa-fms:before {
+	content: "\f0d6"
+}
+
+.fa-upms:before {
+	content: "\f023"	
+}
+
+.fa-crm:before {
+	content: "\f0c0"
+}
+.navbar .menu li:nth-child(6) {
+	transition-delay: 0.12s;
+	transform: rotate(207deg);
+}
+
+.navbar .menu li:nth-child(6) a {
+	transition-delay: 0.24s;
+	transform: rotate(513deg);	
+}
+.navbar .menu li:nth-child(6) span {
+	transform: rotate(513deg);
+    top: 72px;
+    left: -155px;
+}
+
+.navbar .menu li:nth-child(5):after {
+	content: "";
+	position: absolute;
+	left: -151px;
+    top: 44px;
+	width: 200px;
+	transform: rotate(515deg);
+	font-size: 18px;
+	font-family: "微软雅黑"; 
+	color:#fff;
+}
+/*
+.navbar .menu li:nth-child(7) {
+	transition-delay: 0.14s;
+	transform: rotate(325deg);
+}
+
+.navbar .menu li:nth-child(7) a {
+	transition-delay: 0.28s;
+	transform: rotate(395deg);
+}
+.navbar .menu li:nth-child(9) {
+	transition-delay: 0.18s;
+	transform: rotate(405deg);
+}
+
+.navbar .menu li:nth-child(9) a {
+	transition-delay: 0.36s;
+	transform: rotate(315deg);
+}
+
+.navbar .menu li:nth-child(8){
+	transition-delay: 0.12s;
+    transform: rotate(207deg);
+}
+.navbar .menu li:nth-child(8):before{
+	content: "退出";
+	position: absolute;
+    left: -56px;
+    top: -83px;
+	width: 200px;
+	transform: rotate(105deg);
+	font-size: 18px;
+	font-family: "微软雅黑";
+	color:#fff;
+}
+.navbar .menu li:nth-child(8) a {
+	transition-delay: 0.32s;
+	transform: rotate(365deg);
+}
+
+
+*/
+
+
+
+
+
+
+
+
+

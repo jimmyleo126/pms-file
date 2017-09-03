@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+	<config>
+		<models>
+			<model modelId="M912" name="审核管理" show="true" icon="audit" subSystem="crm">
+				<page pageId="R91201" name="默认审核人" editing="form" loadOnRender="true"
+					showMenu="false">
+					<url>turnTodefaultUserSet</url>
+				 </page>
+
+				 <page pageId="R91202" name="报告审核" editing="form" loadOnRender="true" showMenu="true">
+					<conditions>AUDITRECORDUSER,AUDITBRANCHID,TABLEAUDITTYPE</conditions>
+					<functions>FRESH</functions>
+					<funcCondRate>59,40</funcCondRate>
+					<query type="sql">
+						<sql>
+						select * from(
+				              select decode(p.purchase_id,null,' ','采购申请') tableaudittype,p.purchase_id operid,p.branch_id branchid,
+				              transTitles(p.record_user,'TB_C_STAFF', 'STAFF_ID',
+				              'STAFF_NAME') recorduser,to_char(p.record_time, 'yyyy/MM/dd') recordtime,p.status
+				              status,p.remark remark,s.staff_name staffname,b.branch_name branchname
+				              from tb_c_purchase p,tb_c_staff s,tb_c_branch b
+				              where p.record_user = s.staff_id(+)
+				              and p.branch_id = b.branch_id(+)
+				              and p.status = 1
+				              union all
+				          select decode(o.log_id,null,' ','房租价申请') tableaudittype,o.log_id operid,o.branch_id branchid, 
+				          transTitles(o.record_user,'TB_C_STAFF', 'STAFF_ID',
+				              'STAFF_NAME') recorduser,to_char(o.record_time, 'yyyy/MM/dd') recordtime,o.remark status,
+				              o.remark remark,s.staff_name staffname,b.branch_name branchname
+				               from TL_P_OPERATELOG o,tb_c_staff s,tb_c_branch b
+				              where o.record_user = s.staff_id(+)
+				              and o.branch_id = b.branch_id(+)
+				              and o.oper_module = '房租申请'
+				              and o.remark = '1'
+				               union all
+				         select decode(r.repairapply_id,null,' ','维修申请') tableaudittype,r.repairapply_id operid,r.branch_id branchid, 
+                  transTitles(r.reserved_person,'TB_C_MEMBER', 'MEMBER_ID',
+                        'MEMBER_NAME') recorduser,to_char(r.record_time, 'yyyy/MM/dd') recordtime,r.status status,
+                      r.remark remark,m.member_name staffname,b.branch_name branchname
+                       from TB_P_REPAIRAPPLY r,tb_c_member m,tb_c_branch b
+                      where  r.reserved_person = m.member_id(+)
+                      and r.branch_id = b.branch_id(+)
+				              and r.status = '1'
+				               union all
+	                     select decode(c.checkout_id,null,' ','退房申请') tableaudittype,c.checkout_id operid,c.branch_id branchid, 
+                      transTitles(c.member_id,'TB_C_MEMBER', 'MEMBER_ID',
+                        'MEMBER_NAME') recorduser,to_char(c.record_time, 'yyyy/MM/dd') recordtime,c.status status,
+                        c.remark remark,m.member_name memnername,b.branch_name branchname
+                         from TB_P_CHECKOUT c,tb_c_branch b,tb_c_member m
+                        where c.member_id = m.member_id(+)
+                        and c.branch_id = b.branch_id(+)
+	                      and C.status = '1'
+				            ) apd 
+				            where  apd.staffname like '%' || :AUDITRECORDUSER || '%'
+											and apd.branchname like '%' || :AUDITBRANCHID || '%'
+				             and apd.tableaudittype like '%' || :TABLEAUDITTYPE || '%'
+				            order by apd.recordtime desc
+                     </sql>
+					</query>
+					<columns>
+						<column columnId="CZ" name="审核信息" editType="button" buttonCls="button" funcName="审核信息" callFunc="auditInfoDetail" downloadable="false" />
+						<column columnId="RECORDTIME" name="申请日期" editType="date" editable="true"/>
+						<column columnId="RECORDUSER" name="申请人" editable="true" validateRule="NOTNULL,LENGTH:20" />
+						<column columnId="BRANCHID" name="门店" align="center" editable="true" editType="dialog-radio" dialogTarget="Branch" dialogColumns="branchId,branchName" validateRule="NOTNULL"/>
+						<column columnId="OPERID" name="操作编号"  hidden="true" />
+						<column columnId="TABLEAUDITTYPE" name="审核类型" editValue="维修申请:维修申请;退房申请:退房申请;房租价申请:房租价申请;采购申请:采购申请" editType="select"  align="center"/>
+						<column columnId="STATUS" name="审核状态" width="50" editable="true" editValue="	0:已删除;1:待审核;2:审核通过;3:修改;4:作废;" editType="select" validateRule="NOTNULL" />
+					</columns>
+				  </page>
+
+
+				<page pageId="R91203" name="审核记录查看" editing="form" loadOnRender="true" showMenu="true">
+				<conditions>AUDITRECORDUSER,AUDITSTATUS,TABLEAUDITTYPE</conditions>
+					<functions>FRESH</functions>
+					<funcCondRate>59,40</funcCondRate>
+					<query type="sql">
+						<sql>
+						select * from (select a.log_id logid,decode(a.oper_type,'1','采购申请','2','房租价申请') opertype,a.oper_id operid,
+		              transTitles(a.record_user,'TB_C_STAFF', 'STAFF_ID',
+		              'STAFF_NAME') recorduser,to_char(a.record_time, 'yyyy/MM/dd') recordtime,a.status
+		              status,nvl(a.remark,' ') remark,s.staff_name staffname
+		              from tl_c_auditlog a,tb_c_staff s
+		              where a.record_user = s.staff_id(+) 
+		               and a.oper_type != '3'
+		               and a.oper_type != '4'   
+		              union all
+		                            
+		            select a.log_id logid,decode(a.oper_type,'3','退房申请','4','维修申请') opertype,a.oper_id operid,
+		              transTitles(a.record_user,'TB_C_MEMBER', 'MEMBER_ID',
+		              'MEMBER_NAME') recorduser,to_char(a.record_time, 'yyyy/MM/dd') recordtime,a.status
+		              status,nvl(a.remark,' ') remark,m.member_name membername
+		              from tl_c_auditlog a,tb_c_member m
+		              where a.record_user = m.member_id(+)  
+		                    and a.oper_type != '1'
+		                     and a.oper_type != '2' 
+		                     ) apl 
+		                     where apl.recorduser like '%' || :AUDITRECORDUSER || '%'
+                                and apl.status like '%' || :AUDITSTATUS || '%'
+                                and apl.opertype like '%' || :TABLEAUDITTYPE || '%'
+		                     </sql>
+					</query>
+					<columns>
+					    <column columnId="CZ" name="信息详情" editType="button" buttonCls="button" funcName="信息详情" callFunc="audiLogInfoDetail" downloadable="false" />
+					    <column columnId="LOGID" name="日志编号" align="center" primaryKey="true"  validateRule="NOTNULL,LENGTH:8" downloadable="false"/>
+						<column columnId="RECORDUSER" name="申请人" editable="true" validateRule="NOTNULL,LENGTH:20" />
+						<column columnId="RECORDTIME" name="审核日期" editType="date" />
+						<column columnId="OPERID" name="申请单号" editable="true"  />
+						<column columnId="OPERTYPE" name="审核类型" editValue="维修申请:维修申请;退房申请:退房申请;房租价申请:房租价申请;采购申请:采购申请" editType="select"  align="center"/>
+						<column columnId="REMARK" name="审核意见" editable="true" />
+						<column columnId="STATUS" name="审核状态" width="50" editable="true" editValue="	0:已删除;1:待审核;2:审核通过;3:修改;4:作废;" editType="select" validateRule="NOTNULL" />
+					</columns>
+				</page>
+
+
+			</model>
+		</models>
+	</config>
+</configs>

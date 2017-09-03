@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<subTask>
+		<taskId>101</taskId>
+		<nameZH>数据传输定时任务</nameZH>
+		<nameEN>TransportDataTask</nameEN>
+		<taskClass>com.ideassoft.crm.task.TransportDataTask</taskClass>
+		<taskMode>1</taskMode>
+		<taskType>1</taskType>
+		<scheduleExpression>0 0 1 * * ?</scheduleExpression>
+		<isDaemon>false</isDaemon>
+		<autoStart>false</autoStart>
+		<isValid>true</isValid>
+	</subTask>
+	<subTask>
+		<taskId>102</taskId>
+		<nameZH>日结程序</nameZH>
+		<nameEN>DailyTask</nameEN>
+		<taskClass>com.ideassoft.pms.task.DailyTask</taskClass>
+		<taskMode>1</taskMode>
+		<taskType>1</taskType>
+		<scheduleExpression>0 0 4 * * ?</scheduleExpression>
+		<isDaemon>false</isDaemon>
+		<autoStart>false</autoStart>
+		<isValid>true</isValid>
+	</subTask>
+	<subTask>
+		<taskId>103</taskId>
+		<nameZH>保洁预排任务</nameZH>
+		<nameEN>CleanTask</nameEN>
+		<taskClass>com.ideassoft.pms.task.CleanTask</taskClass>
+		<taskMode>1</taskMode>
+		<taskType>1</taskType>
+		<scheduleExpression>5 0 0 1 * ?</scheduleExpression>
+<!--        <scheduleExpression>0 19 16 * * ?</scheduleExpression>-->
+		<isDaemon>false</isDaemon>
+		<autoStart>false</autoStart>
+		<isValid>true</isValid>
+	</subTask>
+	<subTask>
+		<taskId>104</taskId>
+		<nameZH>房租到期提醒</nameZH>
+		<nameEN>ApartmentRentTask</nameEN>
+		<taskClass>com.ideassoft.pms.task.ApartmentRentTask</taskClass>
+		<taskMode>1</taskMode>
+		<taskType>1</taskType>
+		<scheduleExpression>0 0 12 * * ?</scheduleExpression>
+		<isDaemon>false</isDaemon>
+		<autoStart>false</autoStart>
+		<isValid>true</isValid>
+	</subTask>
+</config>

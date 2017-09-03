@@ -1,0 +1,149 @@
+@charset "utf-8";
+
+.table {
+	width: 98.1%;
+	margin: 1% 1%;
+	border: none;
+	height: 16%;
+}
+
+.table_input {
+	width: 63%;
+    height: 30px;
+    font-size: 14px;
+    vertical-align: middle;
+    
+}
+
+.table_textarea {
+	width: 90.7%;
+    height: 30px;
+    font-size: 14px;
+    vertical-align: middle;
+    margin:4px;
+}
+
+.appinfo_c{
+	height:21%;
+	overflow: hidden;
+}
+
+.appinfo_check{
+	height:47%;
+	overflow: hidden;
+}
+
+.appinfo_repair{
+	height:51%;
+	overflow: hidden;
+}
+
+.appinfo_scroll{
+	height: 24%;
+	overflow: scroll;
+}
+.appinfo_scroll textarea{
+	border:1px solid #ddd;
+	border-radius:2px;
+}
+.appinfo_c .table tr td{
+	padding-bottom:1%;
+}
+.appinfo_c label,.appinfo_scroll label,.address label{
+	font-size:14px;
+    display: inline;
+    vertical-align: middle;
+}
+.auditMessageP{
+	height: 80px;
+	 border: 1px solid #DDDDDD; 
+	 width: 80%; 
+	 margin-left: 10%; 
+	 margin-bottom: 2%;
+}
+.address table,.tableInfoTitleLog table{
+	border:none;
+}
+
+.address textarea{
+    height: 25%;
+    border: 1px solid #ddd;
+    width: 88.6%;
+    border-radius: 2px;
+    margin-left: 2px;
+    margin-top: 2px;
+}
+
+.address label{
+    width: 60px;
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: top;
+}
+.address .button,.tableInfoTitleLog .button{
+	border:1px solid #ddd;
+	background:#f1f1f1;
+	color:#333;
+	float: left;
+    margin-left: 10px;
+}
+.address table tr td{
+    padding: 1% 0 11px 42%;
+}
+
+.tableInfoTitleLog .button{
+	float:right;
+	margin-right: 4px;
+}
+
+/*维修申请双击页面*/
+.repair_dblremark {
+	height:56px !important;
+	line-height:50px !important;
+	margin: 4px ;
+	width:92.4%;
+}
+.repair_dblaudit{
+	height:56px !important;
+	line-height:50px !important;
+	margin: 4px ;
+	width:92.4%;
+}
+.repair_dbremark{
+	margin-top:-8px;
+}
+
+/*设置双击页面input框边框*/
+	
+.dbl_repair_input{
+	margin:4px !important;
+	width:69% !important;
+}
+.apply_input .contract_input{
+	width:68% !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

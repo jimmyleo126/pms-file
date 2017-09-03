@@ -1,0 +1,108 @@
+/*高级查询*/
+.house_info{
+	padding: 10px 0;
+}
+.house_info h2{
+    padding-left: 10px;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #4A5064;
+    color: #fff;
+    font-size: 18px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+/*高级查询条件*/
+.house_info ul li{
+	float:left;
+	line-height: 38px;
+	margin:4px;
+	position:relative;
+}
+.house_info .margintop{
+	margin-top:10px;
+}
+.house_info .label_name {
+    float: left;
+    width:97px;
+    text-align: right;
+    font-weight: normal;
+    font-size: 0.85rem;
+}
+input {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    color: #323232;
+    background-color: #fff;
+    border: 1px solid #DDDDDD;
+    line-height: 1.2;
+    font-size: 0.85rem;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+    -webkit-transition-duration: .1s;
+    transition-duration: .1s;
+}
+.house_info .adroom {
+    padding: 10px 5px;
+    width: 145px;
+    margin-left: 4px;
+}
+.house_info textarea{
+	border:1px solid #DDDDDD;
+	margin-left:4px;
+}
+.button_comfirm,.button_complete,.button_cancel,.button_update{
+    background: #535474;
+    color: #fff;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+    
+}
+.button_comfirm{
+	position:absolute;
+	left: -97px;
+    top: 236px;
+}
+.button_complete{
+	left: 47.7%;
+}
+.button_cancel{
+	left: 63.4%;
+}
+.button_update{
+	left: 79.2%;
+}
+/*關閉按鈕*/
+.house_info .house_imooc{
+    position: absolute;
+    top: -4px;
+    left: 95%;
+}
+.house_info .house_imooc:hover{
+	transform: rotate(90dge);
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+}
+/*选择器禁用*/
+input[type="text"]:disabled,textarea:disabled,input[type="submit"]:disabled{
+	background:#F0F0F0;
+}
+/*增加停售房*/
+.fa{
+	position: absolute;
+    z-index: 1;
+    right: 6px;
+    top: 12px;
+    color: #333;
+}
+
+
+
+
+
+
+
+
+

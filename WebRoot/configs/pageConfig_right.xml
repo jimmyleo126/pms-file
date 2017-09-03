@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+	<config>
+		<models>
+			<model modelId="M914" name="权限管理" show="true" icon="audit" subSystem="upms">
+				<page pageId="R91401" name="权限管理">
+					<tabs>R9140101,R9140102</tabs>
+				</page>
+								
+				<page pageId="R9140101" name="用户角色管理" tab="true" containerId="R91401" editing="form" loadOnRender="true">
+					<conditions>STAFFUSERNAME,ROLENAME</conditions>
+					<functions>EDIT</functions>
+					<target>UserRole</target>
+					<rowNum>50</rowNum>
+					<query type="hql">
+						<sql>
+							select ur
+							  from UserRole as ur, Role as r, Staff s
+							 where ur.roleId = r.roleId
+							   and ur.userId = s.staffId
+							   and ur.status = 1
+							   and s.branchId like decode($BRANCHID,'100001','%',$BRANCHID)
+							   and (s.staffName like '%' || :STAFFUSERNAME || '%'
+							    or s.loginName like '%' || :STAFFUSERNAME || '%')
+							   and r.roleName like '%' || :ROLENAME || '%'
+						</sql>
+					</query>
+					<columns>
+						<column columnId="DATAID" name="数据编号"  hidden="true" primaryKey="true" sequence="SEQ_NEW_USERROLE"/>
+						<column columnId="USERID" name="用户姓名" editable="true" editType="dialog-radio" 
+							dialogTarget="Staff" dialogColumns="staffId,staffName" dialogConditions="status = '1' and 
+								branchId like decode($BRANCHID,'100001','%',$BRANCHID)"  validateRule="NOTNULL"/>
+						<column columnId="ROLEID" name="角色名称" editable="true" editType="dialog-radio" 
+							dialogTarget="Role" dialogColumns="roleId,roleName" validateRule="NOTNULL"/>
+						<column columnId="RECORDTIME" name="录入时间" width="100" editType="datetime"/>
+						<column columnId="REMARK" name="备注" editable="true" editType="textarea" align="left"/>
+					</columns>
+				</page>
+				
+				<page pageId="R9140102" name="角色管理" tab="true" containerId="R91401" editing="other" loadOnRender="true">
+					<conditions>ROLENAME</conditions>
+					<target>Role</target>
+					<functions>EDIT</functions>
+					<editFunc>roleRightEdit</editFunc>
+					<delFunc>roleRightDelete</delFunc>
+					<query type="hql">
+						<sql>
+							from Role where roleName like '%' || :ROLENAME || '%' and status = 1
+						</sql>
+					</query>
+					<columns>
+						<column columnId="ROLEID" name="角色编号" hidden="true" primaryKey="true"/>
+						<column columnId="ROLENAME" name="角色名称" width="80"/>
+						<column columnId="RECORDTIME" name="录入时间" width="100" editType="datetime" hidden="true"/>
+						<column columnId="REMARK" name="备注" width="320" align="left"/>
+					</columns>
+				</page>
+				</model>
+		</models>
+	</config>
+</configs>
